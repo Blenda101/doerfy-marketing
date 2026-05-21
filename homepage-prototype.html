@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doerfy — Design. Visualize. Do.</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Doerfy Editorial-Premium + Quiet Luxury
+    ============================================================ */
+    :root {
+      /* Surfaces */
+      --parchment:      #F7F3EE;
+      --stone:          #EDE8E0;
+      --bone:           #E0D9CE;
+      --linen:          #F2EDE6;
+
+      /* Ink */
+      --ink:            #1A1A2E;
+      --ink-muted:      #5A5670;
+      --ink-faint:      #8D8AA0;
+
+      /* Purple — used as ink, not wallpaper */
+      --purple:         #7C5CFF;
+      --purple-deep:    #5B47D9;
+      --purple-light:   #A78BFA;
+      --purple-pale:    #EDE6FF;
+      --purple-ultra:   #F5F0FF;
+
+      /* Dark panels */
+      --manifesto:      #2D2A4A;
+      --manifesto-deep: #1E1C35;
+      --manifesto-mid:  #3F3A6E;
+
+      /* Signal */
+      --green:          #10B981;
+      --amber:          #F59E0B;
+
+      /* Typography */
+      --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Spacing */
+      --space-xs:   4px;
+      --space-sm:   8px;
+      --space-md:   16px;
+      --space-lg:   24px;
+      --space-xl:   40px;
+      --space-2xl:  64px;
+      --space-3xl:  96px;
+      --space-4xl:  128px;
+
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+    }
+
+    /* ============================================================
+       RESET + BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--parchment);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+
+    /* ============================================================
+       UTILITY CLASSES
+    ============================================================ */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: var(--space-xl);
+    }
+
+    .container--wide {
+      max-width: 1400px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+
+    .eyebrow--muted {
+      color: var(--ink-muted);
+    }
+
+    .eyebrow--light {
+      color: var(--purple-light);
+    }
+
+    .rule {
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--purple);
+      vertical-align: middle;
+      margin-right: var(--space-sm);
+    }
+
+    .rule--light {
+      background: var(--purple-light);
+    }
+
+    .rule--faint {
+      background: var(--bone);
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(247, 243, 238, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bone);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: var(--space-xl);
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .nav__logo-mark {
+      width: 32px;
+      height: 32px;
+    }
+
+    .nav__logo-text {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav__links a:hover {
+      color: var(--ink);
+    }
+
+    .nav__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--manifesto);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s ease;
+    }
+
+    .nav__cta:hover {
+      background: var(--manifesto-mid);
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding-top: 128px;
+      padding-bottom: 0;
+      background: var(--parchment);
+      min-height: 100svh;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      align-items: stretch;
+      gap: 0;
+      width: 100%;
+    }
+
+    .hero__left {
+      padding: var(--space-4xl) var(--space-3xl) var(--space-4xl) var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 720px;
+      margin-inline: auto 0;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero__badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero__headline {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero__headline em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .hero__sub {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--ink-muted);
+      max-width: 520px;
+      margin-bottom: var(--space-2xl);
+      font-weight: 300;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--purple-deep);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s ease, transform 0.15s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--purple);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: var(--ink-muted);
+      font-size: 14px;
+      font-weight: 400;
+      border-bottom: 1px solid var(--bone);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      color: var(--ink);
+      border-color: var(--ink-muted);
+    }
+
+    .hero__right {
+      background: var(--manifesto);
+      padding: var(--space-4xl) var(--space-2xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__right::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(124, 92, 255, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero__motto {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .hero__motto-item {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-lg);
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero__motto-item:last-child {
+      border-bottom: none;
+    }
+
+    .hero__motto-num {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--purple-light);
+      min-width: 24px;
+      opacity: 0.7;
+    }
+
+    .hero__motto-word {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .hero__motto-word em {
+      font-style: italic;
+      color: var(--purple-light);
+    }
+
+    .hero__motto-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-left: auto;
+      align-self: center;
+    }
+
+    .hero__principle {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: var(--space-xl);
+    }
+
+    .hero__principle-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: var(--space-sm);
+    }
+
+    .hero__principle-text {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-style: italic;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       POSITIONING STRIP
+    ============================================================ */
+    .strip {
+      background: var(--purple-ultra);
+      border-top: 1px solid var(--purple-pale);
+      border-bottom: 1px solid var(--purple-pale);
+      padding: var(--space-xl) 0;
+    }
+
+    .strip__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2xl);
+      flex-wrap: wrap;
+    }
+
+    .strip__claim {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 400;
+      color: var(--manifesto);
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+
+    .strip__claim em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .strip__divider {
+      width: 1px;
+      height: 32px;
+      background: var(--purple-pale);
+    }
+
+    /* ============================================================
+       HOW IT WORKS — FEATURES RAIL
+    ============================================================ */
+    .features {
+      padding: var(--space-4xl) 0;
+      background: var(--parchment);
+    }
+
+    .features__header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: end;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .features__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .features__title em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .features__intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink-muted);
+      font-weight: 300;
+      max-width: 440px;
+      margin-left: auto;
+    }
+
+    .features__rail {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .feature-item {
+      display: grid;
+      grid-template-columns: 64px 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: start;
+      padding: var(--space-2xl) 0;
+      border-top: 1px solid var(--bone);
+      position: relative;
+      transition: background 0.3s ease;
+    }
+
+    .feature-item:last-child {
+      border-bottom: 1px solid var(--bone);
+    }
+
+    .feature-item__num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-faint);
+      letter-spacing: 0.05em;
+      padding-top: 4px;
+    }
+
+    .feature-item__label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--purple-ultra);
+      color: var(--purple-deep);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: var(--space-md);
+    }
+
+    .feature-item__title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: var(--space-md);
+    }
+
+    .feature-item__body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-muted);
+      font-weight: 300;
+    }
+
+    .feature-item__visual {
+      background: var(--stone);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Feature visual: Theme Builder */
+    .theme-visual {
+      background: linear-gradient(135deg, var(--manifesto) 0%, var(--manifesto-mid) 100%);
+    }
+
+    .theme-visual__content {
+      text-align: left;
+      width: 100%;
+    }
+
+    .theme-tag {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      margin-bottom: var(--space-sm);
+    }
+
+    .theme-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-style: italic;
+      color: #fff;
+      margin-bottom: var(--space-md);
+    }
+
+    .act-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .act-chip {
+      font-size: 10px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    /* Feature visual: Outcome Space */
+    .outcome-visual {
+      background: var(--parchment);
+      border: 1px solid var(--bone);
+    }
+
+    .pyramid-mini {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .pyramid-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .pyramid-bar {
+      height: 28px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .pyramid-bar span {
+      font-size: 10px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .pyramid-bar--theme  { background: var(--purple-deep); width: 40%; }
+    .pyramid-bar--mega   { background: var(--purple);      width: 60%; }
+    .pyramid-bar--proj   { background: var(--purple-light); width: 78%; }
+    .pyramid-bar--todo   { background: var(--purple-pale); width: 100%; }
+    .pyramid-bar--todo span { color: var(--purple-deep); }
+
+    /* Feature visual: Action Funnel */
+    .funnel-visual {
+      background: var(--parchment);
+      border: 1px solid var(--bone);
+    }
+
+    .funnel-mini {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .funnel-step {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .funnel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .funnel-label {
+      font-size: 11px;
+      color: var(--ink-muted);
+      font-weight: 400;
+    }
+
+    .funnel-label--active {
+      font-weight: 600;
+      color: var(--purple-deep);
+    }
+
+    /* ============================================================
+       DOEY SECTION
+    ============================================================ */
+    .doey {
+      padding: var(--space-4xl) 0;
+      background: var(--manifesto);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .doey::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: -120px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(124, 92, 255, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .doey::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .doey__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .doey__left {}
+
+    .doey__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: var(--space-lg);
+    }
+
+    .doey__title em {
+      font-style: italic;
+      color: var(--purple-light);
+    }
+
+    .doey__body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      margin-bottom: var(--space-xl);
+      max-width: 440px;
+    }
+
+    .doey__traits {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .doey__trait {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .doey__trait-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--purple-light);
+    }
+
+    .doey__trait-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+
+    .doey__trait-text strong {
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+    }
+
+    .doey__right {}
+
+    .doey__chat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .doey__chat-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .doey__avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .doey__avatar-initial {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-style: italic;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .doey__chat-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .doey__chat-status {
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 0.04em;
+    }
+
+    .chat-bubble {
+      max-width: 88%;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .chat-bubble--doey {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.82);
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+    }
+
+    .chat-bubble--user {
+      background: var(--purple-deep);
+      color: rgba(255,255,255,0.9);
+      border-bottom-right-radius: 4px;
+      align-self: flex-end;
+    }
+
+    .chat-bubble em {
+      font-style: italic;
+      color: var(--purple-light);
+    }
+
+    .doey__chat-input {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm) var(--space-md);
+      margin-top: var(--space-sm);
+    }
+
+    .doey__chat-input-text {
+      flex: 1;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       MANIFESTO TEASER
+    ============================================================ */
+    .manifesto {
+      padding: var(--space-4xl) 0;
+      background: var(--stone);
+    }
+
+    .manifesto__header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .manifesto__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .manifesto__title em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .manifesto__sub {
+      font-size: 16px;
+      color: var(--ink-muted);
+      font-weight: 300;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+
+    .manifesto__principles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .principle-item {
+      padding: var(--space-2xl) var(--space-xl);
+      border: 1px solid var(--bone);
+      margin: -1px 0 0 -1px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+
+    .principle-item:hover {
+      background: var(--linen);
+      z-index: 1;
+    }
+
+    .principle-item__num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--purple);
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-md);
+    }
+
+    .principle-item__title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: var(--space-sm);
+      line-height: 1.3;
+    }
+
+    .principle-item__excerpt {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .manifesto__footer {
+      text-align: center;
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-2xl);
+      border-top: 1px solid var(--bone);
+    }
+
+    .manifesto__count {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-bottom: var(--space-md);
+    }
+
+    .manifesto__count strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .link-underline {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--purple-deep);
+      border-bottom: 1px solid var(--purple-pale);
+      padding-bottom: 2px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .link-underline:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+
+    /* ============================================================
+       METHODOLOGY DIAGRAMS
+    ============================================================ */
+    .method {
+      padding: var(--space-4xl) 0;
+      background: var(--parchment);
+    }
+
+    .method__header {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .method__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .method__title em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .method__sub {
+      font-size: 16px;
+      color: var(--ink-muted);
+      font-weight: 300;
+      max-width: 540px;
+    }
+
+    .method__diagrams {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+
+    .diagram-card {
+      background: var(--stone);
+      border: 1px solid var(--bone);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      overflow: hidden;
+    }
+
+    .diagram-card__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: var(--space-sm);
+    }
+
+    .diagram-card__title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: var(--space-xs);
+    }
+
+    .diagram-card__desc {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-bottom: var(--space-xl);
+      font-weight: 300;
+    }
+
+    /* Outcome Pyramid SVG */
+    .pyramid-svg-wrap {
+      width: 100%;
+    }
+
+    /* Action Funnel SVG */
+    .funnel-svg-wrap {
+      width: 100%;
+    }
+
+    /* ============================================================
+       CALCULATOR SECTION — GatherAgain aesthetic
+    ============================================================ */
+    .calculator {
+      padding: var(--space-4xl) 0;
+      background: var(--stone);
+    }
+
+    .calculator__header {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .calculator__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-lg);
+      max-width: 640px;
+    }
+
+    .calculator__title em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .calculator__sub {
+      font-size: 16px;
+      color: var(--ink-muted);
+      font-weight: 300;
+      max-width: 480px;
+    }
+
+    .calculator__body {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+
+    .calc-apps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+
+    .calc-app-card {
+      background: var(--parchment);
+      border: 1px solid var(--bone);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      user-select: none;
+    }
+
+    .calc-app-card:hover {
+      border-color: var(--purple-light);
+    }
+
+    .calc-app-card.selected {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px var(--purple-ultra);
+    }
+
+    .calc-app-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .calc-app-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .calc-app-cost {
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+
+    .calc-result {
+      background: var(--manifesto);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      position: sticky;
+      top: 88px;
+    }
+
+    .calc-result__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      margin-bottom: var(--space-lg);
+    }
+
+    .calc-result__selected {
+      margin-bottom: var(--space-xl);
+    }
+
+    .calc-result__tool {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px;
+    }
+
+    .calc-result__tool-name {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .calc-result__tool-cost {
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+    }
+
+    .calc-result__total {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-top: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+
+    .calc-result__total-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .calc-result__total-amount {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .calc-result__total-period {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-left: 2px;
+    }
+
+    .calc-result__vs {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+      padding: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .calc-result__vs-title {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .calc-result__vs-price {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--green);
+    }
+
+    .calc-result__vs-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 2px;
+    }
+
+    .calc-result__cta {
+      display: block;
+      width: 100%;
+      background: var(--purple);
+      color: #fff;
+      text-align: center;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .calc-result__cta:hover {
+      background: var(--purple-light);
+    }
+
+    /* ============================================================
+       BETA CTA SECTION
+    ============================================================ */
+    .beta {
+      padding: var(--space-4xl) 0;
+      background: var(--manifesto-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .beta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124, 92, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .beta__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .beta__left {}
+
+    .beta__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: var(--space-lg);
+    }
+
+    .beta__title em {
+      font-style: italic;
+      color: var(--purple-light);
+    }
+
+    .beta__mantra {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-style: italic;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: var(--space-xl);
+      line-height: 1.5;
+    }
+
+    .beta__details {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .beta__detail {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .beta__detail-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+
+    .beta__right {}
+
+    .beta__form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+    }
+
+    .beta__form-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: var(--space-sm);
+    }
+
+    .beta__form-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: var(--space-xl);
+      font-weight: 300;
+    }
+
+    .form-field {
+      margin-bottom: var(--space-md);
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: var(--space-xs);
+    }
+
+    .form-field input, .form-field select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      padding: 12px var(--space-md);
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-field input::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+
+    .form-field input:focus,
+    .form-field select:focus {
+      border-color: var(--purple-light);
+    }
+
+    .form-field select {
+      appearance: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .form-field select option {
+      background: var(--manifesto-deep);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .beta__form-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      width: 100%;
+      background: var(--purple-deep);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 15px var(--space-xl);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      margin-top: var(--space-lg);
+    }
+
+    .beta__form-submit:hover {
+      background: var(--purple);
+      transform: translateY(-1px);
+    }
+
+    .beta__form-note {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      margin-top: var(--space-md);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--manifesto-deep);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: var(--space-2xl) 0;
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+
+    .footer__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    .footer__name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .footer__motto {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.08em;
+    }
+
+    .footer__links {
+      display: flex;
+      gap: var(--space-xl);
+      list-style: none;
+    }
+
+    .footer__links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.2s ease;
+    }
+
+    .footer__links a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .footer__copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ============================================================
+       SCROLL FADE IN
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       RESPONSIVE — simplified breakpoint
+    ============================================================ */
+    @media (max-width: 900px) {
+      .hero__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero__right {
+        display: none;
+      }
+
+      .features__header {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-item {
+        grid-template-columns: 48px 1fr;
+      }
+
+      .feature-item__visual {
+        display: none;
+      }
+
+      .doey__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .manifesto__principles {
+        grid-template-columns: 1fr;
+      }
+
+      .method__diagrams {
+        grid-template-columns: 1fr;
+      }
+
+      .calculator__body {
+        grid-template-columns: 1fr;
+      }
+
+      .calc-apps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .beta__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding-inline: var(--space-lg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">
+        <!-- Doerfy logomark (simplified from SVG) -->
+        <svg class="nav__logo-mark" viewBox="0 0 171 103" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M82.8 32.5C82.8 32.5 69.4 58.9 47.6 76.5C18.8 99.7 0 103 0 103L52.2 101.3C52.2 101.3 72.9 71.1 82.8 32.5Z" fill="#7C5CFF"/>
+          <path d="M88.1 31.8C88.1 31.8 101.6 58.1 123.4 75.7C152.2 98.9 171 102.2 171 102.2L118.8 100.6C118.8 100.6 98.1 70.4 88.1 31.8Z" fill="#7C5CFF"/>
+          <path d="M85.8 32.6L67.9 101H102L85.8 32.6Z" fill="#5B47D9"/>
+          <path d="M90.3 21.4C90.3 23.6 88.3 25.4 85.8 25.4C83.3 25.4 81.4 23.6 81.4 21.4C81.4 19.2 83.3 17.4 85.8 16.9C88.3 16.9 90.3 19.2 90.3 21.4Z" fill="#7C5CFF"/>
+          <path d="M87.1 38.2H84.1V0H87.1V38.2Z" fill="#7C5CFF"/>
+          <path d="M85.3 6.6L87.1 0H108.2L101.6 6.9L106.7 12.2L86.3 12.7L85.3 6.6Z" fill="#5B47D9"/>
+        </svg>
+        <span class="nav__logo-text">Doerfy</span>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="#how-it-works">How it Works</a></li>
+        <li><a href="#the-method">The Method</a></li>
+        <li><a href="#manifesto">The Manifesto</a></li>
+        <li><a href="#meet-doey">Meet Doey</a></li>
+      </ul>
+
+      <a href="#beta" class="nav__cta">
+        Join the Beta
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero__inner">
+
+      <!-- Left: headline, sub, CTAs -->
+      <div class="hero__left">
+        <div class="hero__badge reveal">
+          <div class="hero__badge-dot"></div>
+          <span class="eyebrow">Beta &mdash; Coming Soon</span>
+        </div>
+
+        <h1 class="hero__headline reveal reveal-delay-1">
+          Design the life<br>
+          <em>you truly desire.</em>
+        </h1>
+
+        <p class="hero__sub reveal reveal-delay-2">
+          Doerfy is software built on a framework for life design. You get an AI coach named Doey, a system that connects your Vision to your daily work, and a practice that compounds over time.
+        </p>
+
+        <div class="hero__actions reveal reveal-delay-3">
+          <a href="#beta" class="btn-primary">
+            Join the Beta
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#manifesto" class="btn-ghost">
+            Read the Manifesto
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Design / Visualize / Do dark panel -->
+      <div class="hero__right">
+        <div class="hero__motto">
+          <div class="hero__motto-item">
+            <span class="hero__motto-num">I</span>
+            <span class="hero__motto-word"><em>Design</em></span>
+            <span class="hero__motto-desc">Theme &middot; Mission &middot; Values</span>
+          </div>
+          <div class="hero__motto-item">
+            <span class="hero__motto-num">II</span>
+            <span class="hero__motto-word">Visualize</span>
+            <span class="hero__motto-desc">Story &middot; Goals</span>
+          </div>
+          <div class="hero__motto-item">
+            <span class="hero__motto-num">III</span>
+            <span class="hero__motto-word">Do</span>
+            <span class="hero__motto-desc">Outcomes &middot; Actions</span>
+          </div>
+        </div>
+
+        <div class="hero__principle">
+          <div class="hero__principle-label">Manifesto &mdash; Principle I</div>
+          <div class="hero__principle-text">
+            "A life that is not designed is a life that is defaulted into. The Doer chooses. The Doer authors."
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       POSITIONING STRIP
+  ============================================================ -->
+  <div class="strip">
+    <div class="container">
+      <div class="strip__inner">
+        <p class="strip__claim">
+          Most software manages your work.<br>
+          <em>Doerfy designs your life.</em>
+        </p>
+        <div class="strip__divider"></div>
+        <p class="strip__claim" style="font-size: 16px; color: var(--ink-muted); font-family: var(--font-body); font-weight: 300;">
+          Powered by the Doerfy Method &mdash; a framework for intentional living built into every feature.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       HOW IT WORKS
+  ============================================================ -->
+  <section class="features" id="how-it-works">
+    <div class="container">
+
+      <div class="features__header">
+        <div>
+          <span class="eyebrow"><span class="rule"></span>How it Works</span>
+          <h2 class="features__title" style="margin-top: 16px;">
+            Three things.<br><em>One practice.</em>
+          </h2>
+        </div>
+        <p class="features__intro">
+          Doerfy is not a task manager with extra steps. It is a system that begins with your Vision and ends with your daily work&mdash;connected, committed, and in rhythm.
+        </p>
+      </div>
+
+      <div class="features__rail reveal">
+
+        <!-- Feature 01: Design your Theme -->
+        <div class="feature-item">
+          <div class="feature-item__num">01</div>
+          <div>
+            <div class="feature-item__label">Design Phase &mdash; Theme Builder</div>
+            <h3 class="feature-item__title">Design your Theme.</h3>
+            <p class="feature-item__body">
+              Before you manage tasks, you author your life. A Theme is the master story that unifies your career, health, relationships, and craft&mdash;not as separate tabs, but as one life lived on purpose. The Four ACTs (Vision, Mission, Values, Strategy) give your Theme structure. Doey helps you find yours.
+            </p>
+          </div>
+          <div class="feature-item__visual theme-visual">
+            <div class="theme-visual__content">
+              <div class="theme-tag">Current Theme</div>
+              <div class="theme-title">"The Year of Deep Work"</div>
+              <div class="act-chips">
+                <span class="act-chip">Act I: Vision</span>
+                <span class="act-chip">Act II: Mission</span>
+                <span class="act-chip">Act III: Values</span>
+                <span class="act-chip">Act IV: Strategy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 02: Organize your Outcomes -->
+        <div class="feature-item">
+          <div class="feature-item__num">02</div>
+          <div>
+            <div class="feature-item__label">Outcome Space &mdash; Pyramid</div>
+            <h3 class="feature-item__title">Organize your Outcomes.</h3>
+            <p class="feature-item__body">
+              The Outcome Pyramid gives every commitment a place. At the top: your Theme. Below it: the Mega Dos that define who you are becoming. Below those: Projects that ship. At the base: Todos that feed them. Nothing floats. Everything connects to what you designed.
+            </p>
+          </div>
+          <div class="feature-item__visual outcome-visual">
+            <div class="pyramid-mini" style="width: 100%;">
+              <div class="pyramid-row">
+                <div class="pyramid-bar pyramid-bar--theme"><span>Theme</span></div>
+              </div>
+              <div class="pyramid-row">
+                <div class="pyramid-bar pyramid-bar--mega"><span>Mega Do</span></div>
+              </div>
+              <div class="pyramid-row">
+                <div class="pyramid-bar pyramid-bar--proj"><span>Project</span></div>
+              </div>
+              <div class="pyramid-row">
+                <div class="pyramid-bar pyramid-bar--todo"><span>Todo Queue</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 03: Commit and Execute -->
+        <div class="feature-item">
+          <div class="feature-item__num">03</div>
+          <div>
+            <div class="feature-item__label">Action Space &mdash; Funnel</div>
+            <h3 class="feature-item__title">Commit and execute.</h3>
+            <p class="feature-item__body">
+              The Action Funnel moves your work from possibility to done. Each stage narrows commitment: from your full queue to seven weekly tasks, from seven to one daily focus, from one to what you do right now. Doers don't drift. The Funnel ensures they don't.
+            </p>
+          </div>
+          <div class="feature-item__visual funnel-visual">
+            <div class="funnel-mini" style="width: 100%;">
+              <div class="funnel-step"><div class="funnel-dot" style="background: var(--purple-pale);"></div><span class="funnel-label">Todo Queue</span></div>
+              <div class="funnel-step"><div class="funnel-dot" style="background: var(--purple-light);"></div><span class="funnel-label">Do Queue</span></div>
+              <div class="funnel-step"><div class="funnel-dot" style="background: var(--purple-light);"></div><span class="funnel-label">Do(30)</span></div>
+              <div class="funnel-step"><div class="funnel-dot" style="background: var(--purple);"></div><span class="funnel-label funnel-label--active">Doing(7) — this week</span></div>
+              <div class="funnel-step"><div class="funnel-dot" style="background: var(--purple-deep);"></div><span class="funnel-label funnel-label--active">Do Today(1) — now</span></div>
+              <div class="funnel-step"><div class="funnel-dot" style="background: var(--purple-deep);"></div><span class="funnel-label">Do Now</span></div>
+              <div class="funnel-step"><div class="funnel-dot" style="background: var(--green);"></div><span class="funnel-label" style="color: var(--green); font-weight: 500;">Done</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MEET DOEY
+  ============================================================ -->
+  <section class="doey" id="meet-doey">
+    <div class="container">
+      <div class="doey__inner">
+
+        <div class="doey__left reveal">
+          <span class="eyebrow eyebrow--light"><span class="rule rule--light"></span>Meet Doey</span>
+          <h2 class="doey__title" style="margin-top: 16px;">
+            Your coach.<br>
+            <em>Not a chatbot.</em>
+          </h2>
+          <p class="doey__body">
+            Doey knows your Theme, your Outcomes, your patterns, and your commitments. Doey asks more than it tells. It holds the structure so you can focus on the work.
+          </p>
+          <div class="doey__traits">
+            <div class="doey__trait">
+              <svg class="doey__trait-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="10" cy="10" r="8"/>
+                <path d="M10 6v4l3 2" stroke-linecap="round"/>
+              </svg>
+              <p class="doey__trait-text"><strong>Persistent across all spaces.</strong> Doey remembers your Vision when you're buried in a task, and remembers the task when you're dreaming about the future.</p>
+            </div>
+            <div class="doey__trait">
+              <svg class="doey__trait-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M10 3C10 3 4 7 4 12a6 6 0 0012 0C16 7 10 3 10 3z"/>
+              </svg>
+              <p class="doey__trait-text"><strong>Framework-first.</strong> Doey operates within the Doerfy Method. It won't tell you to hustle harder. It will ask where that aligns with your Theme.</p>
+            </div>
+            <div class="doey__trait">
+              <svg class="doey__trait-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 10h8M10 6v8" stroke-linecap="round"/>
+                <rect x="2" y="2" width="16" height="16" rx="3"/>
+              </svg>
+              <p class="doey__trait-text"><strong>Warm but direct.</strong> Short sentences. No flattery. Doey talks like a coach who has earned your trust&mdash;not a product that wants you to feel good about not doing the work.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="doey__right reveal reveal-delay-2">
+          <div class="doey__chat">
+            <div class="doey__chat-header">
+              <div class="doey__avatar">
+                <span class="doey__avatar-initial">D</span>
+              </div>
+              <div>
+                <div class="doey__chat-name">Doey</div>
+                <div class="doey__chat-status">&#9679; Active</div>
+              </div>
+            </div>
+
+            <div class="chat-bubble chat-bubble--doey">
+              You have three items in Doing(7) that haven't moved in four days. Which one is blocked, and which one are you avoiding?
+            </div>
+
+            <div class="chat-bubble chat-bubble--user">
+              Honestly, probably avoiding the website draft. I keep saying it needs more thinking.
+            </div>
+
+            <div class="chat-bubble chat-bubble--doey">
+              That's useful. "Needs more thinking" usually means the scope isn't clear enough to start. What's the first version of this that would be <em>good enough to share</em>&mdash;not finished, just ready?
+            </div>
+
+            <div class="chat-bubble chat-bubble--user">
+              A rough outline, I guess. Maybe 30 minutes of work.
+            </div>
+
+            <div class="chat-bubble chat-bubble--doey">
+              Then that's your Do Today(1). Not the website&mdash;the outline. When is it happening?
+            </div>
+
+            <div class="doey__chat-input">
+              <span class="doey__chat-input-text">Talk to Doey&hellip;</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MANIFESTO TEASER
+  ============================================================ -->
+  <section class="manifesto" id="manifesto">
+    <div class="container">
+
+      <div class="manifesto__header reveal">
+        <span class="eyebrow eyebrow--muted"><span class="rule rule--faint"></span>The Doer Manifesto</span>
+        <h2 class="manifesto__title">
+          Ten principles.<br>
+          <em>The bedrock.</em>
+        </h2>
+        <p class="manifesto__sub">
+          Doerfy is built on a creed. Not a list of values&mdash;a set of beliefs about what a life is for. These are not aspirational. They are the truth we build from.
+        </p>
+      </div>
+
+      <div class="manifesto__principles reveal">
+        <div class="principle-item">
+          <div class="principle-item__num">I.</div>
+          <h3 class="principle-item__title">Design the life you truly desire.</h3>
+          <p class="principle-item__excerpt">A life that is not designed is a life that is defaulted into. Before anything else&mdash;before the goals, before the work&mdash;the Doer answers the only question that matters.</p>
+        </div>
+        <div class="principle-item">
+          <div class="principle-item__num">II.</div>
+          <h3 class="principle-item__title">Visualize what you have designed.</h3>
+          <p class="principle-item__excerpt">A vision unseen will not be lived. The Doer renders the designed life into something the eye can hold. What is rendered is remembered. What is remembered is pursued.</p>
+        </div>
+        <div class="principle-item">
+          <div class="principle-item__num">III.</div>
+          <h3 class="principle-item__title">Live by Theme.</h3>
+          <p class="principle-item__excerpt">Career, family, health, craft, money, spirit&mdash;these are not separate lives competing for attention. They are domains within the one life the Theme designs.</p>
+        </div>
+        <div class="principle-item">
+          <div class="principle-item__num">X.</div>
+          <h3 class="principle-item__title">Life is a reflection of what you do.</h3>
+          <p class="principle-item__excerpt">Not of what you intended. Not of what you imagined. The Doer's life is the visible record of the actions taken, the work shipped, the days lived.</p>
+        </div>
+      </div>
+
+      <div class="manifesto__footer reveal">
+        <p class="manifesto__count">Showing 4 of <strong>10 principles</strong></p>
+        <a href="/manifesto" class="link-underline">
+          Read all ten principles
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       METHODOLOGY DIAGRAMS
+  ============================================================ -->
+  <section class="method" id="the-method">
+    <div class="container">
+      <div class="method__header reveal">
+        <span class="eyebrow"><span class="rule"></span>The Doerfy Method</span>
+        <h2 class="method__title" style="margin-top: 16px;">
+          Design. Visualize. <em>Do.</em>
+        </h2>
+        <p class="method__sub">
+          Two structures do the heavy lifting. The Outcome Pyramid holds what you are building. The Action Funnel moves your best work to front and center, every day.
+        </p>
+      </div>
+
+      <div class="method__diagrams reveal">
+
+        <!-- Outcome Pyramid -->
+        <div class="diagram-card">
+          <div class="diagram-card__label">Outcome Space</div>
+          <div class="diagram-card__title">The Outcome Pyramid</div>
+          <div class="diagram-card__desc">From Theme to Todo&mdash;everything connected.</div>
+
+          <div class="pyramid-svg-wrap">
+            <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
+              <!-- Background -->
+              <rect width="480" height="320" fill="transparent"/>
+
+              <!-- Level labels (right side) -->
+              <text x="460" y="54" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#8D8AA0" letter-spacing="0.08em" font-weight="500">THEME</text>
+              <text x="460" y="118" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#8D8AA0" letter-spacing="0.08em" font-weight="500">MEGA DO</text>
+              <text x="460" y="182" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#8D8AA0" letter-spacing="0.08em" font-weight="500">PROJECT</text>
+              <text x="460" y="246" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#8D8AA0" letter-spacing="0.08em" font-weight="500">TODO</text>
+
+              <!-- Pyramid: Theme (apex) -->
+              <path d="M240 20 L150 74 L330 74 Z" fill="#5B47D9"/>
+              <text x="240" y="53" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" font-style="italic" fill="white">Theme</text>
+
+              <!-- Pyramid: Mega Do -->
+              <path d="M150 82 L80 136 L400 136 Z" fill="#7C5CFF"/>
+              <text x="240" y="116" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" font-style="italic" fill="white">Mega Do</text>
+
+              <!-- Pyramid: Project -->
+              <path d="M80 144 L28 198 L452 198 Z" fill="#A78BFA"/>
+              <text x="240" y="178" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" fill="white">Project</text>
+
+              <!-- Pyramid: Todo (base) -->
+              <rect x="20" y="206" width="440" height="52" rx="4" fill="#EDE6FF"/>
+              <text x="240" y="237" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" fill="#5B47D9">Todo Queue</text>
+
+              <!-- Spine line -->
+              <line x1="240" y1="20" x2="240" y2="200" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+
+              <!-- Annotations -->
+              <text x="20" y="274" font-family="DM Sans, sans-serif" font-size="11" fill="#8D8AA0">Identity-level outcomes at top.</text>
+              <text x="20" y="290" font-family="DM Sans, sans-serif" font-size="11" fill="#8D8AA0">Daily work at the base. Everything connected.</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Action Funnel -->
+        <div class="diagram-card">
+          <div class="diagram-card__label">Action Space</div>
+          <div class="diagram-card__title">The Action Funnel</div>
+          <div class="diagram-card__desc">Seven stages. Narrowing commitment to what matters now.</div>
+
+          <div class="funnel-svg-wrap">
+            <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
+              <!-- Funnel stages (top to bottom, narrowing) -->
+              <!-- Stage 1: Todo Queue -->
+              <rect x="20" y="20" width="440" height="34" rx="4" fill="#C4B5FD" opacity="0.35"/>
+              <text x="240" y="42" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#5B47D9" font-weight="500">Todo Queue</text>
+
+              <!-- Stage 2: Do Queue -->
+              <rect x="44" y="62" width="392" height="34" rx="4" fill="#C4B5FD" opacity="0.5"/>
+              <text x="240" y="84" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#5B47D9" font-weight="500">Do Queue</text>
+
+              <!-- Stage 3: Do(30) -->
+              <rect x="72" y="104" width="336" height="34" rx="4" fill="#A78BFA" opacity="0.6"/>
+              <text x="240" y="126" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="white" font-weight="500">Do(30) &mdash; this month</text>
+
+              <!-- Stage 4: Doing(7) — highlighted -->
+              <rect x="104" y="146" width="272" height="38" rx="4" fill="#7C5CFF"/>
+              <text x="240" y="170" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="white" font-weight="600">Doing(7) &mdash; this week</text>
+
+              <!-- Stage 5: Do Today(1) — highlighted -->
+              <rect x="140" y="192" width="200" height="38" rx="4" fill="#5B47D9"/>
+              <text x="240" y="216" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="white" font-weight="600">Do Today(1)</text>
+
+              <!-- Stage 6: Do Now -->
+              <rect x="172" y="238" width="136" height="30" rx="4" fill="#2D2A4A"/>
+              <text x="240" y="258" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="rgba(255,255,255,0.8)" font-weight="500">Do Now</text>
+
+              <!-- Stage 7: Done -->
+              <rect x="200" y="276" width="80" height="24" rx="4" fill="#10B981"/>
+              <text x="240" y="293" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="white" font-weight="600">Done</text>
+
+              <!-- Side connectors -->
+              <line x1="20" y1="54" x2="44" y2="62" stroke="#A78BFA" stroke-width="1" opacity="0.4"/>
+              <line x1="460" y1="54" x2="436" y2="62" stroke="#A78BFA" stroke-width="1" opacity="0.4"/>
+              <line x1="44" y1="96" x2="72" y2="104" stroke="#A78BFA" stroke-width="1" opacity="0.4"/>
+              <line x1="436" y1="96" x2="408" y2="104" stroke="#A78BFA" stroke-width="1" opacity="0.4"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-2xl);" class="reveal">
+        <a href="/method" class="link-underline">
+          Explore the full Method
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CALCULATOR SECTION
+  ============================================================ -->
+  <section class="calculator" id="calculator">
+    <div class="container">
+
+      <div class="calculator__header reveal">
+        <span class="eyebrow eyebrow--muted"><span class="rule rule--faint"></span>The Cost of No System</span>
+        <h2 class="calculator__title">
+          How many tools does it take<br>
+          to <em>not have a system?</em>
+        </h2>
+        <p class="calculator__sub">
+          Select the tools you currently pay for. See what you spend. Then see what one system costs instead.
+        </p>
+      </div>
+
+      <div class="calculator__body">
+
+        <!-- App Grid -->
+        <div>
+          <p style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 16px;">Select your current tools</p>
+          <div class="calc-apps" id="calc-app-grid">
+
+            <div class="calc-app-card" data-app="notion" data-cost="16">
+              <div class="calc-app-icon" style="background: #f0f0f0;">
+                <svg width="24" height="24" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="12" fill="#fff"/><path d="M25 20h50v60H25z" fill="#1A1A2E" opacity="0.06"/><text x="50" y="62" text-anchor="middle" font-family="serif" font-size="40" font-weight="700" fill="#1A1A2E">N</text></svg>
+              </div>
+              <div class="calc-app-name">Notion</div>
+              <div class="calc-app-cost">$16 / mo</div>
+            </div>
+
+            <div class="calc-app-card" data-app="todoist" data-cost="5">
+              <div class="calc-app-icon" style="background: #FFEDE8;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#DB4035"/><path d="M7 12l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="calc-app-name">Todoist</div>
+              <div class="calc-app-cost">$5 / mo</div>
+            </div>
+
+            <div class="calc-app-card" data-app="dayone" data-cost="3">
+              <div class="calc-app-icon" style="background: #E8F4FD;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#3B8EC7"/><text x="12" y="17" text-anchor="middle" font-family="serif" font-size="12" font-weight="700" fill="white">1</text></svg>
+              </div>
+              <div class="calc-app-name">Day One</div>
+              <div class="calc-app-cost">$3 / mo</div>
+            </div>
+
+            <div class="calc-app-card" data-app="asana" data-cost="11">
+              <div class="calc-app-icon" style="background: #FFE8E0;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#F06A6A"/><circle cx="6" cy="17" r="3.5" fill="#F06A6A"/><circle cx="18" cy="17" r="3.5" fill="#F06A6A"/></svg>
+              </div>
+              <div class="calc-app-name">Asana</div>
+              <div class="calc-app-cost">$11 / mo</div>
+            </div>
+
+            <div class="calc-app-card" data-app="obsidian" data-cost="4">
+              <div class="calc-app-icon" style="background: #EDE6FF;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="12,3 21,8 21,16 12,21 3,16 3,8" fill="#7C5CFF" opacity="0.8"/></svg>
+              </div>
+              <div class="calc-app-name">Obsidian</div>
+              <div class="calc-app-cost">$4 / mo</div>
+            </div>
+
+            <div class="calc-app-card" data-app="fantastical" data-cost="5">
+              <div class="calc-app-icon" style="background: #FFE8E8;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="3" fill="#F55B51"/><rect x="3" y="4" width="18" height="6" rx="3" fill="#C0392B"/><text x="12" y="18" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="700" fill="white">CAL</text></svg>
+              </div>
+              <div class="calc-app-name">Fantastical</div>
+              <div class="calc-app-cost">$5 / mo</div>
+            </div>
+
+            <div class="calc-app-card" data-app="linear" data-cost="8">
+              <div class="calc-app-icon" style="background: #F0F0FF;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#5E6AD2"/><path d="M6 18L18 6M6 6h12v12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="calc-app-name">Linear</div>
+              <div class="calc-app-cost">$8 / mo</div>
+            </div>
+
+            <div class="calc-app-card" data-app="reflect" data-cost="10">
+              <div class="calc-app-icon" style="background: #E8F8F0;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#00C896"/><path d="M6 12c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="calc-app-name">Reflect</div>
+              <div class="calc-app-cost">$10 / mo</div>
+            </div>
+
+            <div class="calc-app-card" data-app="chatgpt" data-cost="20">
+              <div class="calc-app-icon" style="background: #F0FAF5;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#10A37F"/><text x="12" y="16" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="600" fill="white">GPT</text></svg>
+              </div>
+              <div class="calc-app-name">ChatGPT Plus</div>
+              <div class="calc-app-cost">$20 / mo</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div class="calc-result" id="calc-result">
+          <div class="calc-result__label">Your Current Stack</div>
+
+          <div class="calc-result__selected" id="calc-selected-list">
+            <div style="font-size: 13px; color: rgba(255,255,255,0.35); font-style: italic;">Select tools to see your total.</div>
+          </div>
+
+          <div class="calc-result__total">
+            <span class="calc-result__total-label">Monthly spend</span>
+            <div>
+              <span class="calc-result__total-amount" id="calc-total">$0</span>
+              <span class="calc-result__total-period">/mo</span>
+            </div>
+          </div>
+
+          <div class="calc-result__vs">
+            <div class="calc-result__vs-title">Doerfy Beta</div>
+            <div class="calc-result__vs-price">Free</div>
+            <div class="calc-result__vs-desc">One system. Vision to Done. Doey included.</div>
+          </div>
+
+          <button class="calc-result__cta" onclick="document.getElementById('beta').scrollIntoView({behavior:'smooth'})">
+            Join the Beta
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BETA CTA
+  ============================================================ -->
+  <section class="beta" id="beta">
+    <div class="container">
+      <div class="beta__inner">
+
+        <div class="beta__left reveal">
+          <span class="eyebrow eyebrow--light"><span class="rule rule--light"></span>Private Beta</span>
+          <h2 class="beta__title" style="margin-top: 16px;">
+            Begin where you are.<br>
+            <em>Doey will meet you there.</em>
+          </h2>
+          <p class="beta__mantra">
+            "Design. Visualize. Do."
+          </p>
+          <div class="beta__details">
+            <div class="beta__detail">
+              <div class="beta__detail-dot"></div>
+              <span>Free during the beta period</span>
+            </div>
+            <div class="beta__detail">
+              <div class="beta__detail-dot"></div>
+              <span>Early access to Doey, Outcome Space, and Action Space</span>
+            </div>
+            <div class="beta__detail">
+              <div class="beta__detail-dot"></div>
+              <span>You help shape the Method as it's refined in practice</span>
+            </div>
+            <div class="beta__detail">
+              <div class="beta__detail-dot"></div>
+              <span>Invitations sent in cohorts &mdash; limited availability</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="beta__right reveal reveal-delay-2">
+          <div class="beta__form">
+            <h3 class="beta__form-title">Request early access.</h3>
+            <p class="beta__form-sub">Tell us where you are. Doey will be ready.</p>
+
+            <form id="beta-form">
+              <div class="form-field">
+                <label for="beta-email">Email address</label>
+                <input type="email" id="beta-email" placeholder="you@example.com" required />
+              </div>
+              <div class="form-field">
+                <label for="beta-name">First name</label>
+                <input type="text" id="beta-name" placeholder="Your first name" />
+              </div>
+              <div class="form-field">
+                <label for="beta-focus">Primary focus area</label>
+                <select id="beta-focus">
+                  <option value="" disabled selected>Where do you most want to improve?</option>
+                  <option value="vision">Building a clear Vision for my life</option>
+                  <option value="organization">Organizing my work and goals</option>
+                  <option value="execution">Executing consistently on what matters</option>
+                  <option value="rhythm">Building better daily and weekly habits</option>
+                  <option value="all">All of the above</option>
+                </select>
+              </div>
+              <button type="submit" class="beta__form-submit" id="beta-submit">
+                Request Early Access
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </form>
+
+            <p class="beta__form-note" id="beta-note">No credit card. No commitments. Just the Method.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__name">Doerfy</span>
+          <span class="footer__motto">Design. Visualize. Do.</span>
+        </div>
+
+        <ul class="footer__links">
+          <li><a href="/method">The Method</a></li>
+          <li><a href="/manifesto">Manifesto</a></li>
+          <li><a href="/doey">Meet Doey</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/beta">Beta</a></li>
+        </ul>
+
+        <span class="footer__copy">&copy; 2026 Doerfy</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ── Scroll reveal ──────────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // Make hero elements visible immediately
+    document.querySelectorAll('.hero .reveal').forEach(el => {
+      el.classList.add('visible');
+    });
+
+    // ── Calculator logic ───────────────────────────────────────
+    const selectedApps = new Map();
+
+    document.querySelectorAll('.calc-app-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const app = card.dataset.app;
+        const cost = parseInt(card.dataset.cost, 10);
+        const name = card.querySelector('.calc-app-name').textContent;
+
+        if (selectedApps.has(app)) {
+          selectedApps.delete(app);
+          card.classList.remove('selected');
+        } else {
+          selectedApps.set(app, { cost, name });
+          card.classList.add('selected');
+        }
+
+        updateCalcResult();
+      });
+    });
+
+    function updateCalcResult() {
+      const listEl = document.getElementById('calc-selected-list');
+      const totalEl = document.getElementById('calc-total');
+
+      let total = 0;
+      let html = '';
+
+      if (selectedApps.size === 0) {
+        html = '<div style="font-size: 13px; color: rgba(255,255,255,0.35); font-style: italic;">Select tools to see your total.</div>';
+      } else {
+        selectedApps.forEach(({ name, cost }) => {
+          total += cost;
+          html += `
+            <div class="calc-result__tool">
+              <span class="calc-result__tool-name">${name}</span>
+              <span class="calc-result__tool-cost">$${cost}/mo</span>
+            </div>
+          `;
+        });
+      }
+
+      listEl.innerHTML = html;
+      totalEl.textContent = '$' + total;
+    }
+
+    // ── Beta form ──────────────────────────────────────────────
+    const betaForm = document.getElementById('beta-form');
+    const betaSubmit = document.getElementById('beta-submit');
+    const betaNote = document.getElementById('beta-note');
+
+    betaForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('beta-email').value;
+      const name = document.getElementById('beta-name').value;
+      const focus = document.getElementById('beta-focus').value;
+
+      if (!email) return;
+
+      // Simulate submission (replace with Supabase call)
+      betaSubmit.textContent = 'Request received.';
+      betaSubmit.disabled = true;
+      betaSubmit.style.background = '#10B981';
+      betaNote.textContent = "You're on the list. We'll be in touch when your cohort opens.";
+
+      console.log('Beta signup:', { email, name, focus });
+    });
+
+    // ── Nav scroll state ───────────────────────────────────────
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.style.boxShadow = '0 1px 24px rgba(26, 26, 46, 0.08)';
+      } else {
+        nav.style.boxShadow = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
