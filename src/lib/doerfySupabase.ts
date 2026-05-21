@@ -5,8 +5,8 @@ import { createClient } from '@supabase/supabase-js'
 // This client is for marketing data that belongs in the Doerfy product DB:
 //   - marketing_leads  (beta signups, lead capture)
 //   - form_submissions (if a form builder form is wired up later)
-const url = process.env.NEXT_PUBLIC_DOERFY_SUPABASE_URL!
-const key = process.env.NEXT_PUBLIC_DOERFY_SUPABASE_ANON_KEY!
+const url = process.env.NEXT_PUBLIC_DOERFY_SUPABASE_URL || ''
+const key = process.env.NEXT_PUBLIC_DOERFY_SUPABASE_ANON_KEY || ''
 
 export const doerfySupabase = createClient(url, key)
 
