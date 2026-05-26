@@ -1074,7 +1074,7 @@ export default function Home() {
           <img src="/images/manifesto-type.jpg" alt="" aria-hidden="true"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.18, mixBlendMode: 'multiply' }} />
         </div>
-        <div className="max-w-6xl mx-auto px-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-10">
           <div className="text-center mb-16 reveal relative z-10">
             <span className="flex items-center justify-center gap-3 text-xs font-semibold tracking-widest uppercase text-ink-muted mb-4">
               <span className="w-8 h-px bg-bone inline-block" /> The Doer Manifesto
@@ -1099,8 +1099,8 @@ export default function Home() {
                   { num: 'V', title: 'Clarify, organize, and prioritize what you capture.', excerpt: 'Capture alone is not enough. The Doer hones discernment — clarifying, organizing, and prioritizing.' },
                 ].map((p, i) => (
                   <div key={p.num}
-                    className={`group flex items-start gap-6 px-8 py-7 hover:bg-parchment/60 transition-colors cursor-default ${i < 4 ? 'border-b border-bone' : ''}`}>
-                    <span className="font-display text-4xl font-medium italic text-purple leading-none w-20 flex-shrink-0 text-right">{p.num}.</span>
+                    className={`group flex items-start gap-4 sm:gap-6 px-4 sm:px-8 py-5 sm:py-7 hover:bg-parchment/60 transition-colors cursor-default ${i < 4 ? 'border-b border-bone' : ''}`}>
+                    <span className="font-display text-3xl sm:text-4xl font-medium italic text-purple leading-none w-12 sm:w-20 flex-shrink-0 text-right">{p.num}.</span>
                     <div className="flex-1 min-w-0">
                       <p className="font-display text-xl font-medium text-ink leading-snug mb-2">{p.title}</p>
                       <p className="text-sm text-ink-faint group-hover:text-ink-muted font-light leading-relaxed transition-colors duration-200">{p.excerpt}</p>
@@ -1119,8 +1119,8 @@ export default function Home() {
                   { num: 'X', title: 'Life is a reflection of what you do.', excerpt: 'Not of what you intended. Not of what you imagined. The Doer\'s life is the visible record of the actions taken.' },
                 ].map((p, i) => (
                   <div key={p.num}
-                    className={`group flex items-start gap-6 px-8 py-7 hover:bg-parchment/60 transition-colors cursor-default ${i < 4 ? 'border-b border-bone' : ''}`}>
-                    <span className="font-display text-4xl font-medium italic text-purple leading-none w-20 flex-shrink-0 text-right">{p.num}.</span>
+                    className={`group flex items-start gap-4 sm:gap-6 px-4 sm:px-8 py-5 sm:py-7 hover:bg-parchment/60 transition-colors cursor-default ${i < 4 ? 'border-b border-bone' : ''}`}>
+                    <span className="font-display text-3xl sm:text-4xl font-medium italic text-purple leading-none w-12 sm:w-20 flex-shrink-0 text-right">{p.num}.</span>
                     <div className="flex-1 min-w-0">
                       <p className="font-display text-xl font-medium text-ink leading-snug mb-2">{p.title}</p>
                       <p className="text-sm text-ink-faint group-hover:text-ink-muted font-light leading-relaxed transition-colors duration-200">{p.excerpt}</p>
