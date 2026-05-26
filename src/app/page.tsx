@@ -1112,7 +1112,7 @@ export default function Home() {
               {/* Right column: VI – X */}
               <div>
                 {[
-                  { num: 'VI', title: 'Focus on and commit to your life design.', excerpt: 'Focus on and commit to your life design.', excerpt: 'Scattered effort produces scattered results. The Doers focus on their life design like a magnifying glass focuses rays of sunlight. Steady aligned focus produces consistent results.' },
+                  { num: 'VI', title: 'Focus on and commit to your life design.', excerpt: 'Scattered effort produces scattered results. The Doers focus on their life design like a magnifying glass focuses rays of sunlight. Steady aligned focus produces consistent results.' },
                   { num: 'VII', title: 'Plan, Review, and Do in rhythm.', excerpt: 'The Doer moves between elevations with intention — up to plan, up to review, back to ground to do. The rhythm is the discipline.' },
                   { num: 'VIII', title: 'Build a team for collective intelligence and effort.', excerpt: 'No one builds a life alone. Every Doer needs a team — selected deliberately to support and hold them accountable.' },
                   { num: 'IX', title: 'Continuously get better at doing.', excerpt: 'Life requires constant calibration, so does the practice of using the Doerfy tools and methods.' },
