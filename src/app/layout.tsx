@@ -22,10 +22,30 @@ export const metadata: Metadata = {
   title: 'Doerfy — Design. Visualize. Do.',
   description:
     'Doerfy is software built on a framework for life design. Get an AI coach, a system connecting your Vision to your daily work, and a practice that compounds over time.',
+  icons: {
+    icon: '/images/logo.png',
+    apple: '/images/logo.png',
+  },
   openGraph: {
     title: 'Doerfy — Design. Visualize. Do.',
-    description: 'Author your life or inherit it.',
+    description: 'Author your life or inherit it. Doerfy is software for life design — AI coach, Outcome Space, and Action Funnel in one system.',
     type: 'website',
+    url: 'https://doerfy.com',
+    siteName: 'Doerfy',
+    images: [
+      {
+        url: '/images/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Doerfy — Design. Visualize. Do.',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Doerfy — Design. Visualize. Do.',
+    description: 'Author your life or inherit it.',
+    images: ['/images/logo.png'],
   },
 }
 
