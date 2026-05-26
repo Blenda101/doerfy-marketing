@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const DoeyAvatar = dynamic(() => import('@/components/DoeyAvatar'), { ssr: false })
 
 export const metadata: Metadata = {
   title: 'Meet Doey — Doerfy',
@@ -54,8 +57,10 @@ export default function MeetDoeyPage() {
         <div className="max-w-6xl mx-auto px-10 h-16 flex items-center justify-between">
           <Link href="/" className="font-display text-xl font-bold text-white tracking-tight">Doerfy</Link>
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/method" className="text-sm text-white/50 hover:text-white/80 transition-colors">The Method</Link>
-            <Link href="/manifesto" className="text-sm text-white/50 hover:text-white/80 transition-colors">Manifesto</Link>
+            <Link href="/method"       className="text-sm text-white/50 hover:text-white/80 transition-colors">The Method</Link>
+            <Link href="/second-brain" className="text-sm text-white/50 hover:text-white/80 transition-colors">Second Brain</Link>
+            <Link href="/manifesto"    className="text-sm text-white/50 hover:text-white/80 transition-colors">Manifesto</Link>
+            <Link href="/meet-doey"    className="text-sm text-white/50 hover:text-white/80 transition-colors">Meet Doey</Link>
           </div>
           <Link href="/#beta" className="flex items-center gap-2 bg-purple-deep hover:bg-purple text-white text-sm font-medium px-5 py-2.5 rounded transition-colors">
             Join the Beta
@@ -141,9 +146,7 @@ export default function MeetDoeyPage() {
               {CHAT_DEMOS.map(demo => (
                 <div key={demo.title} className="bg-white/4 border border-white/8 rounded-2xl p-5 flex flex-col gap-3">
                   <div className="flex items-center gap-3 pb-4 border-b border-white/6">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple to-purple-light flex items-center justify-center flex-shrink-0">
-                      <span className="font-display italic text-xs text-white font-semibold">D</span>
-                    </div>
+                    <DoeyAvatar size={56} />
                     <div>
                       <p className="text-xs font-medium text-white/70">Doey</p>
                       <p className="text-xs text-purple-light/70">{demo.title}</p>
@@ -264,9 +267,9 @@ export default function MeetDoeyPage() {
         <div className="max-w-6xl mx-auto px-10 flex items-center justify-between flex-wrap gap-4">
           <span className="font-display text-base font-semibold text-white/60">Doerfy</span>
           <nav className="flex gap-8">
-            {['/', '/method', '/manifesto'].map((href, i) => (
+            {['/', '/method', '/second-brain', '/manifesto', '/meet-doey'].map((href, i) => (
               <Link key={href} href={href} className="text-xs text-white/30 hover:text-white/55 transition-colors">
-                {['Home', 'The Method', 'Manifesto'][i]}
+                {['Home', 'The Method', 'Second Brain', 'Manifesto', 'Meet Doey'][i]}
               </Link>
             ))}
           </nav>

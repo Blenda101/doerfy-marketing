@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import SiteNav from '@/components/SiteNav'
 
 export const metadata: Metadata = {
   title: 'The Doerfy Method — Design. Visualize. Do.',
@@ -20,19 +21,7 @@ const ArrowRight = () => (
 export default function MethodPage() {
   return (
     <>
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-parchment/92 backdrop-blur-md border-b border-bone">
-        <div className="max-w-6xl mx-auto px-10 h-16 flex items-center justify-between">
-          <Link href="/" className="font-display text-xl font-bold text-ink tracking-tight">Doerfy</Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/manifesto" className="text-sm text-ink-muted hover:text-ink transition-colors">Manifesto</Link>
-            <Link href="/meet-doey" className="text-sm text-ink-muted hover:text-ink transition-colors">Meet Doey</Link>
-          </div>
-          <Link href="/#beta" className="flex items-center gap-2 bg-manifesto text-white text-sm font-medium px-5 py-2.5 rounded hover:bg-manifesto-mid transition-colors">
-            Join the Beta
-          </Link>
-        </div>
-      </nav>
+      <SiteNav />
 
       <main className="bg-parchment pt-16">
 
@@ -54,12 +43,12 @@ export default function MethodPage() {
               Most productivity tools solve<br />the wrong problem.
             </h2>
             <p className="text-base leading-relaxed text-ink-muted font-light mb-6">
-              You don't need another inbox. You don't need another goal-setting app. You don't need a smarter to-do list.
+              You don&apos;t need another inbox. You don&apos;t need another goal-setting app. You don&apos;t need a smarter to-do list.
               You need a way to know — at the end of a long week — whether you spent the hours on the life you actually want.
             </p>
             <p className="text-base leading-relaxed text-ink-muted font-light mb-10">
               Most productivity tools are designed to make you <em>more efficient.</em> The Doerfy Method is designed to make you
-              <em> more intentional.</em> Those aren't the same thing. You can be brutally efficient at the wrong work, and many ambitious people are.
+              <em> more intentional.</em> Those aren&apos;t the same thing. You can be brutally efficient at the wrong work, and many ambitious people are.
             </p>
             <div className="grid md:grid-cols-3 gap-5">
               {[
@@ -190,23 +179,17 @@ export default function MethodPage() {
               <div className="bg-parchment border border-bone rounded-2xl p-6">
                 <p className="text-xs font-semibold tracking-widest uppercase text-purple mb-1">Outcome Space</p>
                 <h3 className="font-display text-2xl font-medium text-ink mb-1">The Outcome Pyramid</h3>
-                <p className="text-sm text-ink-muted font-light mb-6">From Theme to Todo — everything connected.</p>
-                <svg viewBox="0 0 480 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full mb-6">
-                  <path d="M240 20L150 74L330 74Z" fill="#5B47D9"/>
-                  <text x="240" y="53" textAnchor="middle" fontFamily="Georgia,serif" fontSize="13" fontStyle="italic" fill="white">Theme</text>
-                  <path d="M150 82L80 136L400 136Z" fill="#7C5CFF"/>
-                  <text x="240" y="116" textAnchor="middle" fontFamily="Georgia,serif" fontSize="13" fontStyle="italic" fill="white">Mega Do</text>
-                  <path d="M80 144L28 198L452 198Z" fill="#A78BFA"/>
-                  <text x="240" y="178" textAnchor="middle" fontFamily="Georgia,serif" fontSize="13" fill="white">Project</text>
-                  <rect x="20" y="206" width="440" height="48" rx="4" fill="#EDE6FF"/>
-                  <text x="240" y="235" textAnchor="middle" fontFamily="Georgia,serif" fontSize="13" fill="#5B47D9">Todo</text>
-                </svg>
+                <p className="text-sm text-ink-muted font-light mb-4">From Theme to Todo — everything connected.</p>
+                <p className="text-sm text-ink-muted font-light leading-relaxed mb-6">
+                  The Outcome Pyramid decomposes your Theme into a nested hierarchy of executable outcomes. Every level has a narrative and a done-state. Collaborate with Doey to deliver each level&rsquo;s child outcomes — the system keeps them all connected and visible.
+                </p>
+                <img src="/images/outcome.svg" alt="The Outcome Pyramid — Theme, Mega Do, Project, Todo" className="w-full h-auto mb-6" />
                 <div className="space-y-3">
                   {[
-                    { name: 'Theme', desc: 'Your master story. The apex of the pyramid.' },
-                    { name: 'Mega Do', desc: 'Identity-level outcomes. Who you are becoming.' },
-                    { name: 'Project', desc: 'Shippable deliverables. Finite, bounded, done.' },
-                    { name: 'Todo', desc: 'Work streams within a Project. Bridge to the Action Space.' },
+                    { name: 'Theme', desc: 'Your master story. The capstone of outcomes.' },
+                    { name: 'Mega Do', desc: 'Project collections that serve Theme life areas.' },
+                    { name: 'Project', desc: 'Bounded scopes with a clear done-state and timeframe.' },
+                    { name: 'Todo', desc: 'Committed project work unit — decomposes to tasks in the Funnel.' },
                   ].map(l => (
                     <div key={l.name} className="flex items-baseline gap-3">
                       <span className="font-display text-sm italic text-purple w-20 flex-shrink-0">{l.name}</span>
@@ -220,27 +203,26 @@ export default function MethodPage() {
               <div className="bg-parchment border border-bone rounded-2xl p-6">
                 <p className="text-xs font-semibold tracking-widest uppercase text-purple mb-1">Action Space</p>
                 <h3 className="font-display text-2xl font-medium text-ink mb-1">The Action Funnel</h3>
-                <p className="text-sm text-ink-muted font-light mb-6">Seven stages. Narrowing commitment to what matters now.</p>
-                <svg viewBox="0 0 480 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full mb-6">
-                  <rect x="20" y="20" width="440" height="30" rx="4" fill="#C4B5FD" fillOpacity="0.4"/>
-                  <text x="240" y="40" textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="11" fill="#5B47D9" fontWeight="500">Todo Queue</text>
-                  <rect x="44" y="58" width="392" height="30" rx="4" fill="#C4B5FD" fillOpacity="0.55"/>
-                  <text x="240" y="78" textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="11" fill="#5B47D9" fontWeight="500">Do Queue</text>
-                  <rect x="72" y="96" width="336" height="30" rx="4" fill="#A78BFA" fillOpacity="0.65"/>
-                  <text x="240" y="116" textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="11" fill="white" fontWeight="500">Do(30) — this month</text>
-                  <rect x="104" y="134" width="272" height="34" rx="4" fill="#7C5CFF"/>
-                  <text x="240" y="156" textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="12" fill="white" fontWeight="600">Doing(7) — this week</text>
-                  <rect x="140" y="176" width="200" height="34" rx="4" fill="#5B47D9"/>
-                  <text x="240" y="198" textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="12" fill="white" fontWeight="600">Do Today(1)</text>
-                  <rect x="172" y="218" width="136" height="28" rx="4" fill="#2D2A4A"/>
-                  <text x="240" y="237" textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="11" fill="rgba(255,255,255,0.8)" fontWeight="500">Do Now</text>
-                  <rect x="200" y="254" width="80" height="24" rx="4" fill="#10B981"/>
-                  <text x="240" y="271" textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="11" fill="white" fontWeight="600">Done</text>
-                </svg>
-                <p className="text-sm text-ink-muted font-light leading-relaxed">
-                  Each stage narrows commitment: from your full queue to seven this week, from seven to one today, from one to what you do right now.
-                  Doers don&rsquo;t drift. The Funnel ensures they don&rsquo;t.
+                <p className="text-sm text-ink-muted font-light mb-4">Six stages. Narrowing commitment and focus at each stage.</p>
+                <p className="text-sm text-ink-muted font-light leading-relaxed mb-6">
+                  The Action Funnel is the execution layer. Aging occurs when a task has exceeded its stage time threshold. The stage constraints enforce discipline for sustained execution without overcommitting.
                 </p>
+                <img src="/images/action.svg" alt="The Action Funnel — six stages narrowing commitment" className="w-full h-auto mb-6" />
+                <div className="space-y-3">
+                  {[
+                    { name: 'Do Queue ∞', desc: 'Trusted holding area with lowest commitment.' },
+                    { name: 'Do (30)', desc: 'Clarified but not yet prioritized to WIP.' },
+                    { name: 'Doing (7)', desc: 'Committed WIP to complete within 7 days.' },
+                    { name: 'Do Today (1)', desc: 'Committed work for the current day.' },
+                    { name: 'Do Now', desc: 'Single task that has current focus and attention.' },
+                    { name: 'Done', desc: 'Completed. The only honest measure of progress.' },
+                  ].map(l => (
+                    <div key={l.name} className="flex items-baseline gap-3">
+                      <span className="font-display text-sm italic text-purple w-24 flex-shrink-0">{l.name}</span>
+                      <span className="text-xs text-ink-muted font-light">{l.desc}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -254,9 +236,13 @@ export default function MethodPage() {
               Capture. Stage. <em className="italic text-purple">Deliver.</em>
             </h2>
             <p className="text-base leading-relaxed text-ink-muted font-light mb-10">
-              The third dimension of Doerfy operates <em>across</em> the Outcome and Action Spaces — improving the Doer's use of both.
+              The third dimension of Doerfy operates <em>across</em> the Outcome and Action Spaces — improving the Doer&apos;s use of both.
               Three columns. Two names. One practice.
             </p>
+            <div className="mb-10 rounded-2xl overflow-hidden border border-bone bg-stone">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/Practice.svg" alt="Improvement Space — Capture, Stage, Deliver practice diagram" className="w-full h-auto" />
+            </div>
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 {
@@ -373,9 +359,9 @@ export default function MethodPage() {
         <div className="max-w-6xl mx-auto px-10 flex items-center justify-between flex-wrap gap-4">
           <span className="font-display text-base font-semibold text-white/60">Doerfy</span>
           <nav className="flex gap-8">
-            {['/', '/manifesto', '/meet-doey'].map((href, i) => (
+            {['/', '/method', '/second-brain', '/manifesto', '/meet-doey'].map((href, i) => (
               <Link key={href} href={href} className="text-xs text-white/30 hover:text-white/55 transition-colors">
-                {['Home', 'Manifesto', 'Meet Doey'][i]}
+                {['Home', 'The Method', 'Second Brain', 'Manifesto', 'Meet Doey'][i]}
               </Link>
             ))}
           </nav>

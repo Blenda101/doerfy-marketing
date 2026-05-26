@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import SiteNav from '@/components/SiteNav'
 
 export const metadata: Metadata = {
   title: 'The Doer Manifesto — Doerfy',
@@ -14,17 +15,17 @@ const PRINCIPLES = [
   {
     roman: 'I',
     title: 'Design the life you truly desire.',
-    body: 'A life that is not designed is a life that is defaulted into. The Doer chooses. The Doer authors. Before anything else — before the goals, before the work, before the optimization — the Doer answers the only question that matters: what is the life I am trying to build? Without that answer, the rest is motion without meaning.',
+    body: 'A life that is not designed is a life that is defaulted into. The Doer chooses. The Doer authors. Theme design is the Doer\'s GPS — a clear, adaptable destination built from Vision, Mission, Values, and Strategy. It reroutes when life changes. It never loses the destination. Before the goals, before the work, before the optimization — the Doer answers the only question that matters: what is the life I am trying to build? Without that answer, the rest is motion without meaning.',
   },
   {
     roman: 'II',
-    title: 'Visualize what you have designed.',
-    body: 'A vision unseen will not be lived. The Doer renders the designed life into something the eye can hold — a written script, a storyboard, a movie, a banner, a card on the wall. Visualization is not decoration. It is how the design survives the noise of every ordinary day. What is rendered is remembered. What is remembered is pursued.',
+    title: 'Visualize the life you design.',
+    body: 'A vision unseen will not be lived. The Doer renders the designed life into something the eye can hold — a written script, a storyboard, a movie, a banner, a card on the wall. Doers keep their Theme stories in front of them: a daily visual connection to their why, where, and how. Visualization is not decoration. It is how the design survives the noise of every ordinary day. What is rendered is remembered. What is remembered is pursued.',
   },
   {
     roman: 'III',
-    title: 'Live by Theme.',
-    body: 'A scattered life is a life pulled in directions that don\'t connect. The Doer organizes their life around a single Theme — a master story that unifies the work of being alive. Career, family, health, craft, money, spirit — these are not separate lives competing for attention. They are domains within the one life the Theme designs. Wholeness is the discipline of one Theme, lived across many areas.',
+    title: 'Theme all your lives.',
+    body: 'Life has many facets. The Doer\'s Personal, Business, and Spiritual lives are not separate — they are dimensions of one master story. A scattered life is pulled in directions that don\'t connect. The Doer organizes every facet around a single Theme, and that Theme becomes the unifying narrative across all of them. Wholeness is not the absence of complexity. It is the discipline of one Theme, lived across many areas.',
   },
   {
     roman: 'IV',
@@ -39,12 +40,12 @@ const PRINCIPLES = [
   {
     roman: 'VI',
     title: 'Focus on and commit to your life design.',
-    body: 'What matters most is not what feels urgent today. It is not the loudest voice in the room, the freshest fear, or the latest impulse. What matters most is the life the Doer designed — the Theme, the Mission, the Goals committed to in cooler air. The Doer focuses there, and commits ruthlessly: from thirty things to seven, from seven to one, from one to now. Anyone can want many things. Doers commit to the few the design demands.',
+    body: 'Scattered effort produces scattered results. The Doer focuses on their life design like a magnifying glass focuses rays of sunlight — steady, aligned, producing consistent results. What matters most is not what feels urgent today. It is the life the Doer designed — the Theme, the Mission, the Goals committed to in cooler air. The Doer commits ruthlessly: from thirty things to seven, from seven to one, from one to now. Anyone can want many things. Doers commit to the few the design demands.',
   },
   {
     roman: 'VII',
     title: 'Plan, Review, and Do in rhythm.',
-    body: 'Planning is the highest altitude of the work — and the air is thin up there. Stay too long and the Doer gets elevation sickness: dizzy with options, paralyzed by review, unable to descend. The Doer plans and reviews on cadence — briefly, deliberately — and spends most days at ground level, doing the work that was committed. Daily and weekly reviews are short. The monthly, quarterly, and annual rhythms reach higher altitudes, but always return. A life lived in rhythm compounds. A life lived in constant planning drifts.',
+    body: 'The Doer moves between elevations with intention — up to plan, up to review, back to ground to do. The rhythm is the discipline. Planning is the highest altitude of the work, and the air is thin up there. Stay too long and the Doer gets elevation sickness: dizzy with options, paralyzed by review, unable to descend. The Doer plans and reviews on cadence — briefly, deliberately — and spends most days at ground level, doing the work that was committed. A life lived in rhythm compounds. A life lived in constant planning drifts.',
   },
   {
     roman: 'VIII',
@@ -54,7 +55,7 @@ const PRINCIPLES = [
   {
     roman: 'IX',
     title: 'Continuously get better at doing.',
-    body: 'The Method is not the goal. The life is the goal — and the life requires constant calibration. The Doer reviews, reflects, and adapts. What worked is studied. What didn\'t is discarded. The Doer who does not improve at doing will be passed by the Doer who does.',
+    body: 'The Method is not the goal. The life is the goal — and the life requires constant calibration. So does the practice of using the tools and methods that serve it. The Doer reviews, reflects, and adapts. What worked is studied. What didn\'t is discarded. The Doer who does not improve at doing will be passed by the Doer who does.',
   },
   {
     roman: 'X',
@@ -66,15 +67,7 @@ const PRINCIPLES = [
 export default function ManifestoPage() {
   return (
     <>
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-parchment/92 backdrop-blur-md border-b border-bone">
-        <div className="max-w-6xl mx-auto px-10 h-16 flex items-center justify-between">
-          <Link href="/" className="font-display text-xl font-bold text-ink tracking-tight">Doerfy</Link>
-          <Link href="/#beta" className="text-sm font-medium text-purple-deep border-b border-purple-pale pb-0.5 hover:border-purple hover:text-purple transition-all">
-            Join the Beta
-          </Link>
-        </div>
-      </nav>
+      <SiteNav />
 
       <main className="bg-parchment pt-16">
         {/* Hero */}
@@ -84,19 +77,23 @@ export default function ManifestoPage() {
             Ten principles.<br /><em className="italic text-purple">The bedrock.</em>
           </h1>
           <p className="text-lg leading-relaxed text-ink-muted font-light max-w-xl">
-            The Manifesto is the <em>why</em> of the Method. Not a list of values — a creed. Every principle is defensible on its own.
+            The Manifesto is the foundation of the entire Doerfy system. Not a list of values — a founding guide. Every principle is defensible on its own.
             Beneath every layer of Doerfy, beneath even Doey, sit these ten beliefs.
           </p>
         </section>
 
         {/* Opening note */}
-        <section className="bg-manifesto py-14">
+        <section className="bg-manifesto py-16">
           <div className="max-w-3xl mx-auto px-10">
-            <p className="font-display text-[clamp(20px,2.8vw,32px)] italic text-white/75 leading-relaxed">
-              &ldquo;A user choosing Doerfy isn&rsquo;t just choosing software. They&rsquo;re choosing this set of ten beliefs
-              about what a life is for. Some won&rsquo;t agree, and that&rsquo;s correct — they&rsquo;re not Doerfy users.
-              The Manifesto sorts.&rdquo;
+            <p className="font-display text-[clamp(22px,2.8vw,36px)] italic text-white/80 leading-relaxed mb-8">
+              We are not just building software. We are starting a movement — of Doers in pursuit of the life they truly desire.
+              These ten beliefs are the foundation of that movement.
             </p>
+            <Link
+              href="/#beta"
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/18 border border-white/20 text-white text-sm font-medium px-6 py-3 rounded transition-all hover:-translate-y-px">
+              Join the movement
+            </Link>
           </div>
         </section>
 
@@ -180,9 +177,9 @@ export default function ManifestoPage() {
         <div className="max-w-6xl mx-auto px-10 flex items-center justify-between flex-wrap gap-4">
           <span className="font-display text-base font-semibold text-white/60">Doerfy</span>
           <nav className="flex gap-8">
-            {['/', '/method', '/meet-doey'].map((href, i) => (
+            {['/', '/method', '/second-brain', '/manifesto', '/meet-doey'].map((href, i) => (
               <Link key={href} href={href} className="text-xs text-white/30 hover:text-white/55 transition-colors">
-                {['Home', 'The Method', 'Meet Doey'][i]}
+                {['Home', 'The Method', 'Second Brain', 'Manifesto', 'Meet Doey'][i]}
               </Link>
             ))}
           </nav>

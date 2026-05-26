@@ -8,16 +8,9 @@ import AdminPanel from '../Admin/AdminPanel'
 import EmbedModal from './EmbedModal'
 import { ArrowLeft, Settings, MoreVertical, Copy, ArrowRight } from 'lucide-react'
 
-// Doerfy logomark SVG
+// eslint-disable-next-line @next/next/no-img-element
 const DoerfyMark = () => (
-  <svg width="36" height="36" viewBox="0 0 171 103" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M82.8 32.5C82.8 32.5 69.4 58.9 47.6 76.5C18.8 99.7 0 103 0 103L52.2 101.3C52.2 101.3 72.9 71.1 82.8 32.5Z" fill="white"/>
-    <path d="M88.1 31.8C88.1 31.8 101.6 58.1 123.4 75.7C152.2 98.9 171 102.2 171 102.2L118.8 100.6C118.8 100.6 98.1 70.4 88.1 31.8Z" fill="white"/>
-    <path d="M85.8 32.6L67.9 101H102L85.8 32.6Z" fill="rgba(255,255,255,0.7)"/>
-    <circle cx="85.8" cy="21.4" r="4.5" fill="white"/>
-    <path d="M87.1 38.2H84.1V0H87.1V38.2Z" fill="white"/>
-    <path d="M85.3 6.6L87.1 0H108.2L101.6 6.9L106.7 12.2L86.3 12.7L85.3 6.6Z" fill="rgba(255,255,255,0.7)"/>
-  </svg>
+  <img src="/images/logo.png" alt="Doerfy" width="36" height="36" />
 )
 
 const Calculator: React.FC = () => {
