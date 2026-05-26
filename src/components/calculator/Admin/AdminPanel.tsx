@@ -7,12 +7,14 @@ import AppForm from './AppForm'
 import PricingConfig from './PricingConfig'
 import CategoryManagement from './CategoryManagement'
 import LoginForm from '../Auth/LoginForm'
-import { Plus, ListPlus } from 'lucide-react'
+import SitesManager from './SitesManager'
+import { Plus, ListPlus, Globe } from 'lucide-react'
 import { App } from '../../../types'
 import { supabase } from '../../../lib/supabase'
 
 const AdminPanel: React.FC = () => {
   const { apps } = useValueCalculator()
+  const [tab, setTab] = useState<'apps' | 'sites'>('apps')
   const [showAddForm, setShowAddForm] = useState(false)
   const [showCategoryManagement, setShowCategoryManagement] = useState(false)
   const [editingApp, setEditingApp] = useState<App | null>(null)
@@ -40,8 +42,18 @@ const AdminPanel: React.FC = () => {
   return (
     <div className="p-6">
       <div className="mb-6 flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-ink">Admin Panel</h2>
-        {!showAddForm && !showCategoryManagement && (
+        <div className="flex gap-1 bg-stone border border-bone rounded-lg p-1">
+          <button onClick={() => { setTab('apps'); setShowAddForm(false); setShowCategoryManagement(false) }}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${tab === 'apps' ? 'bg-white text-ink shadow-sm' : 'text-ink-muted hover:text-ink'}`}>
+            <ListPlus size={15} /> Apps
+          </button>
+          <button onClick={() => { setTab('sites'); setShowAddForm(false); setShowCategoryManagement(false) }}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${tab === 'sites' ? 'bg-white text-ink shadow-sm' : 'text-ink-muted hover:text-ink'}`}>
+            <Globe size={15} /> Sites
+          </button>
+        </div>
+
+        {tab === 'apps' && !showAddForm && !showCategoryManagement && (
           <div className="flex gap-2">
             <button onClick={() => setShowCategoryManagement(true)}
               className="flex items-center gap-2 bg-white border border-bone hover:bg-stone text-ink-muted px-4 py-2 rounded-md transition-colors">
@@ -55,7 +67,9 @@ const AdminPanel: React.FC = () => {
         )}
       </div>
 
-      {showAddForm ? (
+      {tab === 'sites' ? (
+        <SitesManager />
+      ) : showAddForm ? (
         <AppForm editApp={editingApp} onCancel={handleCancelEdit} />
       ) : showCategoryManagement ? (
         <CategoryManagement onClose={() => setShowCategoryManagement(false)} />
