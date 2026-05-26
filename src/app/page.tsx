@@ -1087,7 +1087,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="border border-bone reveal relative z-10">
+          <div className="border border-bone reveal relative z-10 -mx-4 sm:mx-0">
             <div className="grid md:grid-cols-2">
               {/* Left column: I – V */}
               <div className="md:border-r border-bone">
@@ -1099,10 +1099,10 @@ export default function Home() {
                   { num: 'V', title: 'Clarify, organize, and prioritize what you capture.', excerpt: 'Capture alone is not enough. The Doer hones discernment — clarifying, organizing, and prioritizing.' },
                 ].map((p, i) => (
                   <div key={p.num}
-                    className={`group flex items-start gap-4 sm:gap-6 px-4 sm:px-8 py-5 sm:py-7 hover:bg-parchment/60 transition-colors cursor-default ${i < 4 ? 'border-b border-bone' : ''}`}>
-                    <span className="font-display text-3xl sm:text-4xl font-medium italic text-purple leading-none w-12 sm:w-20 flex-shrink-0 text-right">{p.num}.</span>
+                    className={`group flex items-start gap-3 sm:gap-6 px-4 sm:px-8 py-4 sm:py-7 hover:bg-parchment/60 transition-colors cursor-default ${i < 4 ? 'border-b border-bone' : ''}`}>
+                    <span className="font-display text-2xl sm:text-4xl font-medium italic text-purple leading-none w-8 sm:w-20 flex-shrink-0 text-right">{p.num}.</span>
                     <div className="flex-1 min-w-0">
-                      <p className="font-display text-xl font-medium text-ink leading-snug mb-2">{p.title}</p>
+                      <p className="font-display text-base sm:text-xl font-medium text-ink leading-snug mb-1 sm:mb-2">{p.title}</p>
                       <p className="text-sm text-ink-faint group-hover:text-ink-muted font-light leading-relaxed transition-colors duration-200">{p.excerpt}</p>
                     </div>
                   </div>
@@ -1119,10 +1119,10 @@ export default function Home() {
                   { num: 'X', title: 'Life is a reflection of what you do.', excerpt: 'Not of what you intended. Not of what you imagined. The Doer\'s life is the visible record of the actions taken.' },
                 ].map((p, i) => (
                   <div key={p.num}
-                    className={`group flex items-start gap-4 sm:gap-6 px-4 sm:px-8 py-5 sm:py-7 hover:bg-parchment/60 transition-colors cursor-default ${i < 4 ? 'border-b border-bone' : ''}`}>
-                    <span className="font-display text-3xl sm:text-4xl font-medium italic text-purple leading-none w-12 sm:w-20 flex-shrink-0 text-right">{p.num}.</span>
+                    className={`group flex items-start gap-3 sm:gap-6 px-4 sm:px-8 py-4 sm:py-7 hover:bg-parchment/60 transition-colors cursor-default ${i < 4 ? 'border-b border-bone' : ''}`}>
+                    <span className="font-display text-2xl sm:text-4xl font-medium italic text-purple leading-none w-8 sm:w-20 flex-shrink-0 text-right">{p.num}.</span>
                     <div className="flex-1 min-w-0">
-                      <p className="font-display text-xl font-medium text-ink leading-snug mb-2">{p.title}</p>
+                      <p className="font-display text-base sm:text-xl font-medium text-ink leading-snug mb-1 sm:mb-2">{p.title}</p>
                       <p className="text-sm text-ink-faint group-hover:text-ink-muted font-light leading-relaxed transition-colors duration-200">{p.excerpt}</p>
                     </div>
                   </div>
