@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabase'
 
 interface ValueCalculatorContextType {
   apps: App[]
+  allApps: App[]
   state: CalculatorState
   toggleAppSelection: (appId: string) => void
   updateCompanySize: (size: number) => void
@@ -30,6 +31,7 @@ const SITE_ID = 'doerfy'
 
 export const ValueCalculatorProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [apps, setApps] = useState<App[]>([])
+  const [allApps, setAllApps] = useState<App[]>([])
   const [state, setState] = useState<CalculatorState>({
     selectedApps: [],
     companySize: 1,       // Personal use — always 1
@@ -85,13 +87,7 @@ export const ValueCalculatorProvider: React.FC<{ children: React.ReactNode }> = 
       if (error) throw error
 
       if (existingApps) {
-        // Filter: show apps whose sites array includes 'doerfy' OR is empty/null (show everywhere)
-        const doerfyApps = existingApps.filter((app) => {
-          const sites: string[] = app.sites || []
-          return sites.length === 0 || sites.includes(SITE_ID)
-        })
-
-        const formattedApps = doerfyApps.map(app => ({
+        const formatted: App[] = existingApps.map(app => ({
           id: app.id,
           name: app.name,
           logo: app.logo,
@@ -101,7 +97,11 @@ export const ValueCalculatorProvider: React.FC<{ children: React.ReactNode }> = 
           created_at: app.created_at,
         }))
 
-        setApps(formattedApps)
+        setAllApps(formatted)
+        setApps(formatted.filter(app => {
+          const sites = app.sites || []
+          return sites.length === 0 || sites.includes(SITE_ID)
+        }))
       }
     } catch (error) {
       console.error('Error loading apps:', error)
@@ -224,6 +224,7 @@ export const ValueCalculatorProvider: React.FC<{ children: React.ReactNode }> = 
     <ValueCalculatorContext.Provider
       value={{
         apps,
+        allApps,
         state,
         toggleAppSelection,
         updateCompanySize,

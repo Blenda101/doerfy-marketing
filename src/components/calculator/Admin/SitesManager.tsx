@@ -5,7 +5,7 @@ import { useValueCalculator } from '../../../context/ValueCalculatorContext'
 import { KNOWN_SITES } from '../../../types'
 
 const SitesManager: React.FC = () => {
-  const { apps, updateApp } = useValueCalculator()
+  const { allApps: apps, updateApp } = useValueCalculator()
   const [saving, setSaving] = useState<string | null>(null)
 
   const isOnSite = (appSites: string[] | undefined, siteId: string) => {
