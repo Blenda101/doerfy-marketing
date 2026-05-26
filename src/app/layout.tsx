@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: 'Doerfy',
     images: [
       {
-        url: '/images/logo.png',
+        url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Doerfy — Design. Visualize. Do.',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Doerfy — Design. Visualize. Do.',
     description: 'Author your life or inherit it.',
-    images: ['/images/logo.png'],
+    images: ['/images/og-image.jpg'],
   },
 }
 
