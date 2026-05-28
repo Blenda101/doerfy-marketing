@@ -1,9 +1,15 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import Script from 'next/script'
 import ValueCalculator from '@/components/calculator/ValueCalculator'
-import { doerfySupabase } from '@/lib/doerfySupabase'
 import DoeyAvatar from '@/components/DoeyAvatar'
+
+declare global {
+  interface Window {
+    __doerfyOpenForm: (id: string, mode: string) => void
+  }
+}
 
 /* ── Doerfy logomark ─────────────────────────────────────────── */
 // eslint-disable-next-line @next/next/no-img-element
@@ -440,10 +446,6 @@ function DoMockup()        { return <PhaseMockup phase="do" /> }
 export default function Home() {
   useReveal()
   const [scrolled, setScrolled] = useState(false)
-  const [betaSubmitted, setBetaSubmitted] = useState(false)
-  const [betaEmail, setBetaEmail] = useState('')
-  const [betaName, setBetaName] = useState('')
-  const [betaFocus, setBetaFocus] = useState('')
   const [activeModule, setActiveModule] = useState<ModuleKey | null>(null)
   const [activeHemisphere, setActiveHemisphere] = useState<'execution' | 'knowledge' | null>(null)
   const [activePhase, setActivePhase] = useState<'design' | 'visualize' | 'do'>('design')
@@ -462,34 +464,11 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const handleBetaSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!betaEmail) return
-    try {
-      const { error } = await doerfySupabase.from('marketing_leads').insert({
-        email: betaEmail,
-        source: 'doerfy_marketing_homepage',
-        lead_type: 'beta',
-        status: 'new',
-        cohort_tags: ['beta_2026'],
-        survey_data: {
-          first_name: betaName || null,
-          primary_focus: betaFocus || null,
-        },
-      })
-      if (error && error.code !== '23505') {
-        console.error('Beta signup error:', error.message)
-      }
-    } catch (err) {
-      console.error('Beta signup failed:', err)
-    }
-    setBetaSubmitted(true)
-  }
-
   const activeModuleData = activeModule ? MODULES[activeModule] : null
 
   return (
     <>
+      <Script src="https://dev.doerfy.com/embed/forms.js" strategy="lazyOnload" />
       {/* ══ NAV ════════════════════════════════════════════════ */}
       <nav className={`fixed top-0 left-0 right-0 z-50 bg-parchment/92 backdrop-blur-md border-b border-bone transition-shadow ${scrolled ? 'shadow-sm' : ''}`}>
         <div className="max-w-6xl mx-auto px-10 h-16 flex items-center justify-between">
@@ -510,9 +489,9 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <a href="#beta" className="flex items-center gap-2 bg-manifesto text-white text-sm font-medium px-5 py-2.5 rounded hover:bg-manifesto-mid transition-colors">
-            Join the Beta <ArrowRight size={14} />
-          </a>
+          <button onClick={() => window.__doerfyOpenForm('bigtopa-coming-soon-417a0a', 'popup')} className="flex items-center gap-2 bg-manifesto text-white text-sm font-medium px-5 py-2.5 rounded hover:bg-manifesto-mid transition-colors">
+            Join the Movement <ArrowRight size={14} />
+          </button>
         </div>
       </nav>
 
@@ -532,9 +511,9 @@ export default function Home() {
               Doerfy is a life-design system. You get a persistent AI coach, a framework with the tools to execute it, and a practice that compounds over time. All tuned to connect your vision and what you do every day.
             </p>
             <div className="flex items-center gap-6 flex-wrap reveal hero-reveal reveal-delay-3">
-              <a href="#beta" className="flex items-center gap-2 bg-purple-deep hover:bg-purple text-white px-7 py-3.5 rounded text-sm font-medium transition-all hover:-translate-y-px">
-                Join the Beta <ArrowRight />
-              </a>
+              <button onClick={() => window.__doerfyOpenForm('bigtopa-coming-soon-417a0a', 'popup')} className="flex items-center gap-2 bg-purple-deep hover:bg-purple text-white px-7 py-3.5 rounded text-sm font-medium transition-all hover:-translate-y-px">
+                Join the Movement <ArrowRight />
+              </button>
               <a href="#manifesto" className="flex items-center gap-2 text-sm text-ink-muted border-b border-bone pb-0.5 hover:text-ink hover:border-ink-muted transition-all">
                 Read the Manifesto <ArrowRight size={14} />
               </a>
@@ -556,7 +535,7 @@ export default function Home() {
             <div className="absolute bottom-8 left-8 right-8 z-10">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-2">Manifesto — Principle I</p>
               <p className="font-display text-sm italic text-white/65 leading-relaxed max-w-xs">
-                &ldquo;A life that is not designed is a life that is defaulted into. The Doer chooses. The Doer authors.&rdquo;
+                &ldquo;A life that is not designed is a life that is defaulted into. The Doer authors the life they live.&rdquo;
               </p>
             </div>
           </div>
@@ -568,7 +547,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-10 flex items-center justify-center gap-16 flex-wrap">
           <p className="font-display text-[clamp(18px,2.5vw,26px)] text-manifesto text-center">
             Most productivity software manages your work.<br />
-            <em className="italic text-purple">Doerfy is the canvas and operating system for your life.</em>
+            <em className="italic text-purple">Doerfy is the canvas and GPS for your life.</em>
           </p>
         </div>
       </div>
@@ -712,14 +691,13 @@ export default function Home() {
         {
           img: '/images/Practice.svg',
           alt: 'Doer Practice OS — CIM loop diagram',
-          tag: 'The Practice — Embedded Improvement Model',
+          tag: 'The Practice — Capture, Stage, and Deliver',
           title: 'The practice that keeps the system aligned.',
           body: 'The Continuous Improvement Practice is not a phase — it is the connective tissue between our tools, users and Doey. All internalize this practice together, closing the loop from vision to done.',
           features: [
             { label: 'Capture', desc: 'Capture at conception get it our of your head' },
-            { label: 'COP', desc: 'The key discipline of discernment — clarify, organize, and prioritize' },
-            { label: 'Elevations', desc: 'Master your work rhythm to avoid altitude sickness' },
-            { label: 'Check-in Rhythms', desc: 'Daily · Weekly · Monthly · Quarterly · Annual' },
+            { label: 'Stage', desc: 'The key discipline of discernment — clarify, organize, and prioritize' },
+            { label: 'Deliver', desc: 'Master your work rhythm to avoid altitude sickness. Daily · Weekly · Monthly · Quarterly · Annual check-ins' },
           ],
           bg: 'bg-parchment',
           imgLeft: true,
@@ -1192,53 +1170,11 @@ export default function Home() {
           </div>
 
           <div className="reveal reveal-delay-2">
-            <div className="bg-white/4 border border-white/8 rounded-2xl p-8">
-              {betaSubmitted ? (
-                <div className="text-center py-8">
-                  <div className="w-12 h-12 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center mx-auto mb-4">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  </div>
-                  <h3 className="font-display text-xl font-medium text-white mb-2">Request received.</h3>
-                  <p className="text-sm text-white/45">You&rsquo;re on the list. We&rsquo;ll be in touch when your cohort opens.</p>
-                </div>
-              ) : (
-                <>
-                  <h3 className="font-display text-2xl font-medium text-white mb-1">Request early access.</h3>
-                  <p className="text-sm text-white/40 mb-6 font-light">Tell us where you are. Doey will be ready.</p>
-                  <form onSubmit={handleBetaSubmit} className="space-y-4">
-                    <div>
-                      <label className="block text-xs font-semibold tracking-widest uppercase text-white/35 mb-1.5">Email address</label>
-                      <input type="email" required value={betaEmail} onChange={e => setBetaEmail(e.target.value)}
-                        placeholder="you@example.com"
-                        className="w-full bg-white/6 border border-white/12 rounded px-4 py-3 text-white/85 text-sm placeholder-white/25 outline-none focus:border-purple-light transition-colors" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold tracking-widest uppercase text-white/35 mb-1.5">First name</label>
-                      <input type="text" value={betaName} onChange={e => setBetaName(e.target.value)}
-                        placeholder="Your first name"
-                        className="w-full bg-white/6 border border-white/12 rounded px-4 py-3 text-white/85 text-sm placeholder-white/25 outline-none focus:border-purple-light transition-colors" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold tracking-widest uppercase text-white/35 mb-1.5">Primary focus</label>
-                      <select value={betaFocus} onChange={e => setBetaFocus(e.target.value)}
-                        className="w-full bg-white/6 border border-white/12 rounded px-4 py-3 text-white/60 text-sm outline-none focus:border-purple-light transition-colors appearance-none">
-                        <option value="" disabled>Where do you feel it most?</option>
-                        <option value="wandering">I move a lot but can&apos;t describe where I&apos;m headed</option>
-                        <option value="drifting">I have a vision but no structured path to execute it</option>
-                        <option value="scattered">I plan but execution is chaotic — too much open at once</option>
-                        <option value="reactive">I ship but I never step back to review and improve</option>
-                        <option value="hollow">I work hard but my notes and ideas don&apos;t compound into anything</option>
-                      </select>
-                    </div>
-                    <button type="submit"
-                      className="w-full flex items-center justify-center gap-2 bg-purple-deep hover:bg-purple text-white py-3.5 rounded text-sm font-medium transition-all hover:-translate-y-px mt-2">
-                      Request Early Access <ArrowRight />
-                    </button>
-                  </form>
-                  <p className="text-center text-xs text-white/20 mt-4">No credit card. No commitments. Just the Method.</p>
-                </>
-              )}
-            </div>
+            <div
+              data-doerfy-form
+              data-slug="bigtopa-coming-soon-417a0a"
+              data-mode="inline"
+            />
           </div>
         </div>
       </section>
