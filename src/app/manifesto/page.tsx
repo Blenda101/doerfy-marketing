@@ -45,7 +45,7 @@ const PRINCIPLES = [
   {
     roman: 'VII',
     title: 'Plan, Review, and Do in rhythm.',
-    body: 'The Doer moves between elevations with intention — up to plan, up to review, back to ground to do. The rhythm is the discipline. Planning is the highest altitude of the work, and the air is thin up there. Stay too long and the Doer gets elevation sickness: dizzy with options, paralyzed by review, unable to descend. The Doer plans and reviews on cadence — briefly, deliberately — and spends most days at ground level, doing the work that was committed. A life lived in rhythm compounds. A life lived in constant planning drifts.',
+    body: 'The Doer moves between altitudes with intention — up to plan, up to review, back to ground to do. The rhythm is the discipline. Planning is the highest altitude of the work, and the air is thin up there. Stay too long and the Doer gets altitude sickness: dizzy with options, paralyzed by review, unable to descend. The Doer plans and reviews on cadence — briefly, deliberately — and spends most days at ground level, doing the work that was committed. A life lived in rhythm compounds. A life lived in constant planning drifts.',
   },
   {
     roman: 'VIII',

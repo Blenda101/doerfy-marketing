@@ -101,7 +101,7 @@ const MODULES: Record<ModuleKey, ModuleInfo> = {
     phase: 'All Phases — OS',
     color: '#D97706',
     bgColor: 'rgba(217,119,6,0.1)',
-    features: ['Capture (always active) → COP → Commit gate', 'Elevations: Plan (10k ft) · Review (5k ft) · Do (0 ft)', 'Five nested rhythms: Daily, Weekly, Monthly, Quarterly, Annual', 'Doey surfaces the right ritual at the right time'],
+    features: ['Capture (always active) → COP → Commit gate', 'Altitudes: Plan (10k ft) · Review (5k ft) · Do (0 ft)', 'Five nested rhythms: Daily, Weekly, Monthly, Quarterly, Annual', 'Doey surfaces the right ritual at the right time'],
   },
   notes: {
     name: 'Notes',
@@ -645,7 +645,7 @@ export default function Home() {
                   <div className="space-y-4">
                     {[
                       { name: 'Action Funnel', desc: 'Do Queue → Doing(7) → Do Now → Done' },
-                      { name: 'Improvement Space', desc: 'Capture → COP → Commit → Elevations' },
+                      { name: 'Improvement Space', desc: 'Capture → COP → Commit → Altitudes' },
                       { name: 'Knowledge Base', desc: 'Notes · Library · Canvas · Post' },
                     ].map(t => (
                       <div key={t.name} className="flex items-start gap-3">
@@ -1091,7 +1091,7 @@ export default function Home() {
               <div>
                 {[
                   { num: 'VI', title: 'Focus on and commit to your life design.', excerpt: 'Scattered effort produces scattered results. The Doers focus on their life design like a magnifying glass focuses rays of sunlight. Steady aligned focus produces consistent results.' },
-                  { num: 'VII', title: 'Plan, Review, and Do in rhythm.', excerpt: 'The Doer moves between elevations with intention — up to plan, up to review, back to ground to do. The rhythm is the discipline.' },
+                  { num: 'VII', title: 'Plan, Review, and Do in rhythm.', excerpt: 'The Doer moves between altitudes with intention — up to plan, up to review, back to ground to do. The rhythm is the discipline.' },
                   { num: 'VIII', title: 'Build a team for collective intelligence and effort.', excerpt: 'No one builds a life alone. Every Doer needs a team — selected deliberately to support and hold them accountable.' },
                   { num: 'IX', title: 'Continuously get better at doing.', excerpt: 'Life requires constant calibration, so does the practice of using the Doerfy tools and methods.' },
                   { num: 'X', title: 'Life is a reflection of what you do.', excerpt: 'Not of what you intended. Not of what you imagined. The Doer\'s life is the visible record of the actions taken.' },
