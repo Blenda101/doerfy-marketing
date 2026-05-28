@@ -696,7 +696,7 @@ export default function Home() {
           body: 'The Continuous Improvement Practice is not a phase — it is the connective tissue between our tools, users and Doey. All internalize this practice together, closing the loop from vision to done.',
           features: [
             { label: 'Capture', desc: 'Capture at conception get it our of your head' },
-            { label: 'Stage', desc: 'The key discipline of discernment — clarify, organize, and prioritize' },
+            { label: 'Stage', desc: 'Hone the discipline of discernment with a trusted a trusted place to capture and create.' },
             { label: 'Deliver', desc: 'Master your work rhythm to avoid altitude sickness. Daily · Weekly · Monthly · Quarterly · Annual check-ins' },
           ],
           bg: 'bg-parchment',
@@ -1172,7 +1172,7 @@ export default function Home() {
           <div className="reveal reveal-delay-2">
             <div
               data-doerfy-form
-              data-slug="bigtopa-coming-soon-417a0a"
+              data-slug="beta-signup-form-1e59ea"
               data-mode="inline"
             />
           </div>
