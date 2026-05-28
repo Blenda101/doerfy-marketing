@@ -1169,7 +1169,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="reveal reveal-delay-2">
+          <div className="reveal reveal-delay-2 rounded-2xl border border-white/10 overflow-hidden">
             <div
               data-doerfy-form
               data-slug="beta-signup-form-1e59ea"
