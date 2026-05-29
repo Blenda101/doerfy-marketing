@@ -83,7 +83,7 @@ export default function ManifestoPage() {
             Ten principles.<br /><em className="italic text-purple">The bedrock.</em>
           </h1>
           <p className="text-lg leading-relaxed text-ink-muted font-light max-w-xl">
-            The Manifesto is the foundation of the entire Doerfy system. Not a list of values — a founding guide. Every principle is defensible on its own.
+            The Manifesto is the foundation of the entire Doerfy framework. Not a list of values — a founding guide. Every principle is defensible on its own.
             Beneath every layer of Doerfy, beneath even Doey, sit these ten beliefs.
           </p>
         </section>
