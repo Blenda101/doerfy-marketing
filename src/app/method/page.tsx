@@ -332,6 +332,16 @@ export default function MethodPage() {
                   Meet Doey <ArrowRight />
                 </Link>
               </div>
+              <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:col-span-2">
+                <p className="text-xs font-semibold tracking-widest uppercase text-purple-light mb-3">Private Beta</p>
+                <p className="font-display text-lg italic text-white/70 mb-3">Be among the first to use the Method in practice.</p>
+                <p className="text-sm text-white/40 font-light leading-relaxed mb-5">
+                  Early access to Doey, the Outcome Space, and the Action Space — free during the beta period. You help shape the Method as it&apos;s refined in real life.
+                </p>
+                <Link href="/#beta" className="inline-flex items-center gap-2 text-sm text-purple-light border-b border-purple-light/30 pb-0.5 hover:border-purple-light transition-all">
+                  Request Early Access <ArrowRight />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
