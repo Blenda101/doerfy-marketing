@@ -57,7 +57,7 @@ const MODULES: Record<ModuleKey, ModuleInfo> = {
     name: 'Doey',
     space: 'Agent in the Loop',
     tagline: 'One coach. One memory. Every space.',
-    desc: 'Doey is the persistent AI coach embedded across every tool. To you, Doey is a coach — warm, specific, and always in context. To the system, Doey is the AI agent in the CIM loop, helping you embed the practice of getting life done.',
+    desc: 'Doey is the persistent AI coach embedded across every tool. To you, Doey is a coach — warm, specific, and always in context. To the system, Doey is the AI agent in the CSD loop, helping you embed the practice of getting life done.',
     phase: 'All Phases',
     color: '#7C5CFF',
     bgColor: 'rgba(124,92,255,0.12)',
@@ -97,7 +97,7 @@ const MODULES: Record<ModuleKey, ModuleInfo> = {
     name: 'Improvement Space',
     space: 'The OS',
     tagline: 'The continuous loop that compounds your doing.',
-    desc: 'The Continuous Improvement Model — the operating system of Doerfy. Not a phase inside "Do." It runs across all three phases: capturing and refining in Design, generating reports in Visualize, running at full intensity in Do.',
+    desc: 'The Continuous Improvement Practice (CIP) — the operating system of Doerfy. Not a phase inside "Do." It runs across all three phases: capturing and refining in Design, generating reports in Visualize, running at full intensity in Do.',
     phase: 'All Phases — OS',
     color: '#D97706',
     bgColor: 'rgba(217,119,6,0.1)',
@@ -117,7 +117,7 @@ const MODULES: Record<ModuleKey, ModuleInfo> = {
     name: 'Todo',
     space: 'Outcome Space — Queue',
     tagline: 'The committed list. What you said you would do.',
-    desc: 'The Todo is the smallest unit in the Outcome Pyramid — below Project, above raw Task. A Todo is a specific, bounded action you have committed to completing. Once clarified and prioritized through CIM, Todos enter the Action Funnel as executable Tasks.',
+    desc: 'The Todo is the smallest unit in the Outcome Pyramid — below Project, above raw Task. A Todo is a specific, bounded action you have committed to completing. Once clarified and prioritized through the CSD loop, Todos enter the Action Funnel as executable Tasks.',
     phase: 'Do — Plan',
     color: '#1A1A2E',
     bgColor: 'rgba(28,28,46,0.07)',
@@ -690,7 +690,7 @@ export default function Home() {
       {[
         {
           img: '/images/Practice.svg',
-          alt: 'Doer Practice OS — CIM loop diagram',
+          alt: 'Doer Practice OS — CSD loop diagram',
           tag: 'The Practice — Capture, Stage, and Deliver',
           title: 'The practice that keeps the system aligned.',
           body: 'The Continuous Improvement Practice is not a phase — it is the connective tissue between our tools, users and Doey. All internalize this practice together, closing the loop from vision to done.',
@@ -995,7 +995,7 @@ export default function Home() {
               The agent<br /><em className="italic text-purple-light">in your loop.</em>
             </h2>
             <p className="text-base leading-relaxed text-white/55 font-light mb-8 max-w-md">
-              Doey is the persistent AI coach embedded across every space in Doerfy. To you, Doey is a coach. To the system, Doey is the AI agent in the CIM loop — one identity, one memory, one intelligence on your whole life.
+              Doey is the persistent AI coach embedded across every space in Doerfy. To you, Doey is a coach. To the system, Doey is the AI agent in the CSD loop — one identity, one memory, one intelligence on your whole life.
             </p>
             <div className="space-y-5">
               {[
