@@ -136,7 +136,7 @@ export default function ManifestoPage() {
                 {
                   label: 'Principles IV–VII',
                   title: 'The Do principles',
-                  desc: 'The four phases of the improvement loop: capture, process, commit, rhythm.',
+                  desc: 'The three phases of the improvement loop: capture, stage, deliver.',
                 },
                 {
                   label: 'Principles VIII–X',

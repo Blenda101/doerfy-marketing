@@ -101,7 +101,7 @@ const MODULES: Record<ModuleKey, ModuleInfo> = {
     phase: 'All Phases — OS',
     color: '#D97706',
     bgColor: 'rgba(217,119,6,0.1)',
-    features: ['Capture (always active) → COP → Commit gate', 'Altitudes: Plan (10k ft) · Review (5k ft) · Do (0 ft)', 'Five nested rhythms: Daily, Weekly, Monthly, Quarterly, Annual', 'Doey surfaces the right ritual at the right time'],
+    features: ['Capture → Stage → Deliver', 'Altitudes: Plan (10k ft) · Review (5k ft) · Do (0 ft)', 'Five nested rhythms: Daily, Weekly, Monthly, Quarterly, Annual', 'Doey surfaces the right ritual at the right time'],
   },
   notes: {
     name: 'Notes',
@@ -121,7 +121,7 @@ const MODULES: Record<ModuleKey, ModuleInfo> = {
     phase: 'Do — Plan',
     color: '#1A1A2E',
     bgColor: 'rgba(28,28,46,0.07)',
-    features: ['Direct output of Story and Project planning', 'Every Todo has a scope, owner, and done-state', 'COP: Clarify → Organize → Prioritize before committing', 'Committed Todos flow into the Action Funnel as Tasks'],
+    features: ['Direct output of Story and Project planning', 'Every Todo has a scope, owner, and done-state', 'Stage: Clarify → Organize → Prioritize before committing', 'Committed Todos flow into the Action Funnel as Tasks'],
   },
   library: {
     name: 'Library',
@@ -645,7 +645,7 @@ export default function Home() {
                   <div className="space-y-4">
                     {[
                       { name: 'Action Funnel', desc: 'Do Queue → Doing(7) → Do Now → Done' },
-                      { name: 'Improvement Space', desc: 'Capture → COP → Commit → Altitudes' },
+                      { name: 'Improvement Space', desc: 'Capture → Stage → Deliver → Altitudes' },
                       { name: 'Knowledge Base', desc: 'Notes · Library · Canvas · Post' },
                     ].map(t => (
                       <div key={t.name} className="flex items-start gap-3">
