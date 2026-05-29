@@ -561,11 +561,11 @@ export default function Home() {
                 <span className="w-8 h-px bg-purple inline-block" /> How it Works
               </span>
               <h2 className="font-display text-[clamp(36px,4vw,56px)] font-medium leading-[1.1] tracking-tight text-ink">
-                The Doerfy<br /><em className="italic text-purple">Method.</em>
+                The Doerfy<br /><em className="italic text-purple">Framework.</em>
               </h2>
             </div>
             <p className="text-base leading-relaxed text-ink-muted font-light max-w-md ml-auto">
-              The Doerfy Method is not a task manager with goal-setting bolted on. It begins with Vision, ends with your daily work, and keeps both connected through every tool.
+              The Doerfy Framework is not a task manager with goal-setting bolted on. It begins with Vision, ends with your daily work, and keeps both connected through its tools, methods and practices.
             </p>
           </div>
 
