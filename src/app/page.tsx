@@ -7,7 +7,7 @@ import DoeyAvatar from '@/components/DoeyAvatar'
 
 declare global {
   interface Window {
-    __doerfyOpenForm: (id: string, mode: string) => void
+    __doerfyOpenForm: (id: string, mode: string, color?: string, theme?: string) => void
   }
 }
 
@@ -489,7 +489,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <button onClick={() => window.__doerfyOpenForm('beta-signup-form-1e59ea', 'popup')} className="flex items-center gap-2 bg-manifesto text-white text-sm font-medium px-5 py-2.5 rounded hover:bg-manifesto-mid transition-colors">
+          <button onClick={() => window.__doerfyOpenForm('beta-signup-form-1e59ea', 'popup', undefined, 'dark')} className="flex items-center gap-2 bg-manifesto text-white text-sm font-medium px-5 py-2.5 rounded hover:bg-manifesto-mid transition-colors">
             Join the Movement <ArrowRight size={14} />
           </button>
         </div>
@@ -511,7 +511,7 @@ export default function Home() {
               Doerfy is a life-design system. You get a persistent AI coach, a framework with the tools to execute it, and a practice that compounds over time. All tuned to connect your vision and what you do every day.
             </p>
             <div className="flex items-center gap-6 flex-wrap reveal hero-reveal reveal-delay-3">
-              <button onClick={() => window.__doerfyOpenForm('beta-signup-form-1e59ea', 'popup')} className="flex items-center gap-2 bg-purple-deep hover:bg-purple text-white px-7 py-3.5 rounded text-sm font-medium transition-all hover:-translate-y-px">
+              <button onClick={() => window.__doerfyOpenForm('beta-signup-form-1e59ea', 'popup', undefined, 'dark')} className="flex items-center gap-2 bg-purple-deep hover:bg-purple text-white px-7 py-3.5 rounded text-sm font-medium transition-all hover:-translate-y-px">
                 Join the Movement <ArrowRight />
               </button>
               <a href="#manifesto" className="flex items-center gap-2 text-sm text-ink-muted border-b border-bone pb-0.5 hover:text-ink hover:border-ink-muted transition-all">
