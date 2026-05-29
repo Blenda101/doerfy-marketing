@@ -971,6 +971,11 @@ export default function Home() {
               )}
             </div>
           </div>
+          <div className="text-center mt-10 reveal">
+            <a href="/second-brain" className="inline-flex items-center gap-2 text-sm font-medium text-purple-deep border-b border-purple-pale pb-0.5 hover:border-purple hover:text-purple transition-all">
+              Explore the Second Brain <ArrowRight size={14} />
+            </a>
+          </div>
         </div>
       </section>
 
