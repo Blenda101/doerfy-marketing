@@ -1078,7 +1078,7 @@ export default function Home() {
                   { num: 'I', title: 'Design the life you truly desire.', excerpt: 'Theme design is the Doer\'s GPS — a clear, adaptable destination set by Vision, Mission, Values, and Strategy. It reroutes. It never loses the destination.' },
                   { num: 'II', title: 'Visualize the life you design.', excerpt: 'Doers keep their Theme stories in front of them — a daily visual connection to their why, where, and how.' },
                   { num: 'III', title: 'Theme all your lives.', excerpt: 'Life has many facets. The Doer\'s Personal, Business, and Spiritual lives are not separate — they are dimensions of one master story.' },
-                  { num: 'IV', title: 'Capture the Outcomes and Actions at conception.', excerpt: 'The thought is most alive at the moment it is born. The mind is for designing; the system is for remembering.' },
+                  { num: 'IV', title: 'Capture the Outcomes and Actions at conception.', excerpt: 'The thought is most alive at the moment it is born. The mind is for thinking; the system is for keeping.' },
                   { num: 'V', title: 'Clarify, organize, and prioritize what you capture.', excerpt: 'Capture alone is not enough. The Doer hones discernment — clarifying, organizing, and prioritizing.' },
                 ].map((p, i) => (
                   <div key={p.num}

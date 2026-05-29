@@ -36,7 +36,7 @@ const PRINCIPLES = [
   {
     roman: 'IV',
     title: 'Capture the Outcomes and Actions at conception.',
-    body: 'The thought is most alive at the moment it is born. The idea, the action, the commitment — captured as it is conceived, it lives. Captured an hour later, it is half what it was. Captured a day later, it is gone. The Doer captures now — in the moment of conception — and lets the system hold it. The mind is for designing; the system is for remembering what the mind cannot.',
+    body: 'The thought is most alive at the moment it is born. The idea, the action, the commitment — captured as it is conceived, it lives. Captured an hour later, it is half what it was. Captured a day later, it is gone. The Doer captures now — in the moment of conception — and lets the system hold it. The mind is for thinking; the system is for keeping.',
   },
   {
     roman: 'V',

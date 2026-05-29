@@ -248,7 +248,7 @@ export default function MethodPage() {
                 {
                   operational: 'Capture',
                   philosophical: 'Conception',
-                  desc: 'Get thoughts out of your head the moment they appear. No filtering, no judging. The mind is for designing; the system is for remembering.',
+                  desc: 'Get thoughts out of your head the moment they appear. No filtering, no judging. The mind is for thinking; the system is for keeping.',
                 },
                 {
                   operational: 'Stage',
