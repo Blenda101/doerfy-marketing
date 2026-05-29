@@ -248,9 +248,9 @@ export default function SecondBrainPage() {
             <div className="bg-stone border border-bone rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
                 <p className="text-xs font-semibold tracking-widest uppercase text-purple mb-2">Free Download</p>
-                <h3 className="font-display text-2xl font-medium text-ink mb-2">The Doerfy Method Infographic</h3>
+                <h3 className="font-display text-2xl font-medium text-ink mb-2">The Doerfy Framework Infographic</h3>
                 <p className="text-sm text-ink-muted font-light leading-relaxed max-w-md">
-                  A single-page visual overview of the complete Doerfy Method — all ten principles, the two hemispheres, and how the UPCS connects them. Print it, pin it, share it.
+                  A single-page visual overview of the complete Doerfy Framework — all ten principles, the two hemispheres, and how the UPCS connects them. Print it, pin it, share it.
                 </p>
               </div>
               <a
