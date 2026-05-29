@@ -61,7 +61,7 @@ const PRINCIPLES = [
   {
     roman: 'IX',
     title: 'Continuously get better at doing.',
-    body: 'The Framework is not the goal. Perfection is not the goal. The life is the goal — and the life requires constant calibration. So does the practice of using the tools and methods that serve it. The Doer reviews, reflects, and adapts. What worked is studied. What didn\'t is discarded. The Doer who stops improving will drift from the life they designed.',
+    body: 'The Framework is not the goal. Perfection is not the goal. The life is the goal — and the life requires constant calibration. So does the practice of using the tools and methods that serve it. The Doer reviews, reflects, and adapts. What worked is studied. What didn\'t is discarded. The Doer who stops improving doing will drift from the life they designed.',
   },
   {
     roman: 'X',
