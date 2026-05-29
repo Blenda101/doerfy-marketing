@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   },
 }
 
+const ArrowRight = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 const PRINCIPLES = [
   {
     roman: 'I',
@@ -92,7 +98,7 @@ export default function ManifestoPage() {
             <Link
               href="/#beta"
               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/18 border border-white/20 text-white text-sm font-medium px-6 py-3 rounded transition-all hover:-translate-y-px">
-              Join the movement
+              Join the Beta <ArrowRight />
             </Link>
           </div>
         </section>
@@ -165,7 +171,7 @@ export default function ManifestoPage() {
               </Link>
               <Link href="/method"
                 className="text-sm text-white/45 border-b border-white/15 pb-0.5 hover:text-white/70 hover:border-white/30 transition-all">
-                Explore the Method
+                Explore the Framework
               </Link>
             </div>
           </div>
