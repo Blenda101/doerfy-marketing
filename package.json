@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "download-logos": "node --env-file=.env.local scripts/download-logos.js",
+    "normalize-svgs": "node scripts/normalize-svgs.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.7",
