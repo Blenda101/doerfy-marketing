@@ -140,17 +140,19 @@ Skips: `scope`, `plan`, `business`, `team`
 
 ### 6. Domain Wiring — Marketing Site → App
 
-The new marketing site (`doerfy-marketing`) is deployed on Netlify. The "Join the Beta" CTA currently posts to a Supabase-backed form.
+The new marketing site (`doerfy-marketing`) is deployed on Netlify. The "Join the Beta" CTAs open the standalone Doerfy Forms embed (slug `beta-signup-form-1e59ea`), which captures submissions on the forms tool's own backend.
 
 **What needs to connect:**
-- Beta form submission on marketing site → `marketing_leads` table in the main app DB
-- Current form uses: `doerfy-marketing/src/lib/doerfySupabase.ts` — posts directly to Supabase
-- This works fine and can remain as-is for now (lead capture only, no auth involved)
+- Beta form submission on marketing site → captured by the standalone Doerfy Forms tool (embed `forms.js`); origin set via `NEXT_PUBLIC_DOERFY_FORMS_ORIGIN`
+- UTM params + referrer are auto-collected by the embed; each CTA passes a `placement` value (`homepage_nav` / `homepage_hero` / `homepage_beta_inline`) stored in the forms tool's `placement` column
+- The legacy direct-to-Supabase path (`src/lib/doerfySupabase.ts`) has been removed — the embed is now the single capture path
 
-**Domain routing (handled at DNS/Netlify level, not in code):**
-- `doerfy.com` → marketing site (doerfy-marketing, Netlify)
-- `app.doerfy.com` → main app (apps/web, wherever hosted)
+**Domain routing — ✅ COMPLETE:**
+- `doerfy.com` → marketing site (doerfy-marketing, Netlify) ✅ Live
+- `app.doerfy.com` → main app (apps/web, AWS Amplify, main branch) ✅ Live
 - Auth/onboarding links in magic link emails should point to `app.doerfy.com/auth/magic?token=xxx`
+- `serverless.yml` `APP_BASE_URL` prod already updated to `https://app.doerfy.com`
+- Supabase allowed redirect URLs already include `https://app.doerfy.com`
 
 ---
 

@@ -7,9 +7,17 @@ import DoeyAvatar from '@/components/DoeyAvatar'
 
 declare global {
   interface Window {
-    __doerfyOpenForm: (id: string, mode: string, color?: string, theme?: string) => void
+    __doerfyOpenForm: (id: string, mode: string, color?: string, theme?: string, placement?: string) => void
   }
 }
+
+/* ── Doerfy Forms embed ──────────────────────────────────────── */
+// Origin of the standalone Doerfy Forms tool. Override per-environment with
+// NEXT_PUBLIC_DOERFY_FORMS_ORIGIN; defaults to the live custom domain.
+// UTM params + referrer are auto-captured by the embed.
+const FORMS_ORIGIN =
+  process.env.NEXT_PUBLIC_DOERFY_FORMS_ORIGIN || 'https://forms.doerfy.com'
+const FORM_SLUG = 'beta-signup-form-1e59ea'
 
 /* ── Doerfy logomark ─────────────────────────────────────────── */
 // eslint-disable-next-line @next/next/no-img-element
@@ -468,7 +476,7 @@ export default function Home() {
 
   return (
     <>
-      <Script src="https://dev.doerfy.com/embed/forms.js" strategy="lazyOnload" />
+      <Script src={`${FORMS_ORIGIN}/embed/forms.js`} strategy="lazyOnload" />
       {/* ══ NAV ════════════════════════════════════════════════ */}
       <nav className={`fixed top-0 left-0 right-0 z-50 bg-parchment/92 backdrop-blur-md border-b border-bone transition-shadow ${scrolled ? 'shadow-sm' : ''}`}>
         <div className="max-w-6xl mx-auto px-10 h-16 flex items-center justify-between">
@@ -489,7 +497,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <button onClick={() => window.__doerfyOpenForm('beta-signup-form-1e59ea', 'popup', undefined, 'dark')} className="flex items-center gap-2 bg-manifesto text-white text-sm font-medium px-5 py-2.5 rounded hover:bg-manifesto-mid transition-colors">
+          <button onClick={() => window.__doerfyOpenForm(FORM_SLUG, 'popup', undefined, 'dark', 'homepage_nav')} className="flex items-center gap-2 bg-manifesto text-white text-sm font-medium px-5 py-2.5 rounded hover:bg-manifesto-mid transition-colors">
             Join the Movement <ArrowRight size={14} />
           </button>
         </div>
@@ -511,7 +519,7 @@ export default function Home() {
               Doerfy is a life-design system. You get a persistent AI coach, a framework with the tools to execute it, and a practice that compounds over time. All tuned to connect your vision and what you do every day.
             </p>
             <div className="flex items-center gap-6 flex-wrap reveal hero-reveal reveal-delay-3">
-              <button onClick={() => window.__doerfyOpenForm('beta-signup-form-1e59ea', 'popup', undefined, 'dark')} className="flex items-center gap-2 bg-purple-deep hover:bg-purple text-white px-7 py-3.5 rounded text-sm font-medium transition-all hover:-translate-y-px">
+              <button onClick={() => window.__doerfyOpenForm(FORM_SLUG, 'popup', undefined, 'dark', 'homepage_hero')} className="flex items-center gap-2 bg-purple-deep hover:bg-purple text-white px-7 py-3.5 rounded text-sm font-medium transition-all hover:-translate-y-px">
                 Join the Movement <ArrowRight />
               </button>
               <a href="#manifesto" className="flex items-center gap-2 text-sm text-ink-muted border-b border-bone pb-0.5 hover:text-ink hover:border-ink-muted transition-all">
@@ -596,8 +604,8 @@ export default function Home() {
             {activePhase === 'design' && (
               <div className="grid md:grid-cols-[2fr_3fr] gap-14 items-center">
                 <div>
-                  <h3 className="font-display text-[clamp(26px,3vw,40px)] font-medium text-ink mb-5 leading-tight">Author the life you intend to build.</h3>
-                  <p className="text-sm leading-relaxed text-ink-muted font-light mb-8">Before you manage tasks, you design a life. With Doey, you work through the Four ACTs — Vision, Mission, Values, Strategy — to produce a written Script: your master story. The Wheel of Life shows where you are. The Theme Builder is where you decide where you are going.</p>
+                  <h3 className="font-display text-[clamp(26px,3vw,40px)] font-medium text-ink mb-5 leading-tight">Author the life you intend to live.</h3>
+                  <p className="text-sm leading-relaxed text-ink-muted font-light mb-8">Before you manage tasks, you design a life. Start with the Wheel of Life to rate where you are in each life area. Then continue with Doey, working through the Four ACTs — Vision, Mission, Values, Strategy — to produce a written Script: your master story. Next step is to visualize your story.</p>
                   <div className="space-y-4">
                     {[
                       { name: 'Theme Builder', desc: 'Four ACTs + your written Script' },
@@ -1177,8 +1185,9 @@ export default function Home() {
           <div className="reveal reveal-delay-2 rounded-2xl border border-white/10 overflow-hidden">
             <div
               data-doerfy-form
-              data-slug="beta-signup-form-1e59ea"
+              data-slug={FORM_SLUG}
               data-mode="inline"
+              data-placement="homepage_beta_inline"
             />
           </div>
         </div>
