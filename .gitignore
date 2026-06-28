@@ -32,3 +32,6 @@ next-env.d.ts
 # OS
 .DS_Store
 Thumbs.db
+
+# Scratch / demos (not part of the app)
+Code demo/
