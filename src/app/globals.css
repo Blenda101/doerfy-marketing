@@ -43,3 +43,66 @@ input[type='range'] { accent-color: #7C5CFF; }
   50% { opacity: 0.3; }
 }
 .animate-pulse-slow { animation: pulse 2.5s ease-in-out infinite; }
+
+/* Blog article body — renders Poily-published content (renderArticleBodyHtml)
+   in Doerfy's own type system: Playfair headings, DM Sans body, purple links,
+   parchment/bone surfaces. */
+.blog-content {
+  font-size: 18px;
+  line-height: 1.75;
+  color: #2A2740;
+}
+.blog-content > * + * { margin-top: 1.25em; }
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  font-family: var(--font-playfair);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #1A1A2E;
+  margin-top: 1.8em;
+}
+.blog-content h2 { font-size: 1.7rem; }
+.blog-content h3 { font-size: 1.35rem; }
+.blog-content h4 { font-size: 1.1rem; }
+.blog-content a {
+  color: #7C5CFF;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.blog-content a:hover { color: #5B47D9; }
+.blog-content strong { color: #1A1A2E; font-weight: 600; }
+.blog-content ul,
+.blog-content ol { padding-left: 1.4em; }
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li { margin-top: 0.4em; }
+.blog-content blockquote {
+  border-left: 3px solid #7C5CFF;
+  padding-left: 1em;
+  color: #5A5670;
+  font-style: italic;
+}
+.blog-content pre {
+  background: #1E1C35;
+  color: #EDE6FF;
+  padding: 16px 18px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 0.9em;
+}
+.blog-content :not(pre) > code {
+  background: rgba(124, 92, 255, 0.1);
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+.blog-content img,
+.blog-content .post-image img { max-width: 100%; height: auto; border-radius: 10px; }
+.blog-content figure figcaption { font-size: 0.85em; color: #8D8AA0; margin-top: 0.5em; text-align: center; }
+.blog-content hr { border: 0; border-top: 1px solid #E0D9CE; margin: 2.4em 0; }
+.blog-content .table-wrapper { overflow-x: auto; }
+.blog-content table { border-collapse: collapse; width: 100%; font-size: 0.95em; }
+.blog-content th,
+.blog-content td { border: 1px solid #E0D9CE; padding: 8px 12px; text-align: left; }
