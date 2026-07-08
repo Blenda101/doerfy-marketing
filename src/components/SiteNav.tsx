@@ -14,6 +14,7 @@ export default function SiteNav() {
           <Link href="/second-brain" className="text-sm text-ink-muted hover:text-ink transition-colors">Second Brain</Link>
           <Link href="/manifesto"    className="text-sm text-ink-muted hover:text-ink transition-colors">Manifesto</Link>
           <Link href="/meet-doey"    className="text-sm text-ink-muted hover:text-ink transition-colors">Meet Doey</Link>
+          <Link href="/blog"         className="text-sm text-ink-muted hover:text-ink transition-colors">Blog</Link>
         </div>
         <Link href="/#beta" className="flex items-center gap-2 bg-manifesto text-white text-sm font-medium px-5 py-2.5 rounded hover:bg-manifesto-mid transition-colors">
           Join the Beta
