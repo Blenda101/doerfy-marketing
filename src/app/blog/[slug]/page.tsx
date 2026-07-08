@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import SiteNav from '@/components/SiteNav'
+import BlogCtaWiring from '@/components/BlogCtaWiring'
 import { getBlogPost } from '@/lib/poily'
 
 export const revalidate = 60
@@ -100,6 +101,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             className="blog-content mt-10"
             dangerouslySetInnerHTML={{ __html: post.bodyHtml || '' }}
           />
+          <BlogCtaWiring />
         </article>
       </main>
 
