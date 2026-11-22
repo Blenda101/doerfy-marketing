@@ -1186,12 +1186,14 @@ export default function Home() {
             <span className="font-display text-base font-semibold text-white/60">Doerfy</span>
             <span className="text-xs text-white/20 tracking-wider">Design. Visualize. Do.</span>
           </div>
-          <ul className="flex gap-8 list-none">
+          <ul className="flex flex-wrap gap-x-8 gap-y-2 list-none">
             {[
               { label: 'The Method', href: '/method' },
               { label: 'Manifesto', href: '/manifesto' },
               { label: 'Meet Doey', href: '/meet-doey' },
               { label: 'Beta', href: '#beta' },
+              { label: 'Privacy', href: '/privacy' },
+              { label: 'Terms', href: '/terms' },
             ].map(l => (
               <li key={l.label}><a href={l.href} className="text-xs text-white/30 hover:text-white/55 transition-colors">{l.label}</a></li>
             ))}
